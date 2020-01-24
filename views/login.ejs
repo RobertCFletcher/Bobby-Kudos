@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="#">
+</head>
+
+<body>
+
+  <h1>Login Authentication</h1>
+
+  <% if (messages.error) { %>
+  <%= messages.error %>
+  <% } %>
+  <form action="/login" method="post" >
+    <li>
+    <label for="authEmail">Email: </label>
+    <input type="email" id="authEmail" name="userEmail" placeholder="Enter Email Here" >
+   </li>  
+
+   <li>
+    <label for="createPassword">Password</label>
+    <input type="password" id="createPassword" name="userPass" placeholder="Enter Password" >
+   </li>
+
+   <button>Submit</button>
+</body>
+</html>
+

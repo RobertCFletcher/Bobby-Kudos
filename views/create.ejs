@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Create Account</title>
+  <link rel="stylesheet" href="#">
+</head>
+
+<body>
+
+  <h1>New Account Creation</h1>
+
+  <form action="/create" method="post" >
+    <li>
+    <label for="createEmail">Email: </label>
+    <input type="email" id="createEmail" name="userEmail" placeholder="Enter Email Here" >
+   </li>  
+
+   <li>
+    <label for="createPassword">Password</label>
+    <input type="password" id="createPassword" name="userPass" placeholder="Enter Password" >
+   </li>
+
+   <li>
+    <input type="radio" id="adminRadio" name="accountType" value="admin">
+    <label for="adminRadio">Admin Account</label>
+    <input type="radio" id="mangRadio" name="accountType" value="manager">
+    <label for="mangRadio">Manager Account</label>
+   </li>
+    <button>Create Account</button> 
+  </form>
+
+</body>
+</html>
