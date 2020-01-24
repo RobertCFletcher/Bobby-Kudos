@@ -1,15 +1,15 @@
 var LocalStrategy = require("passport-local").Strategy;         //Just need strategy from passport local
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcrypt");                                 //used to hash/salt passwords and compare password hashes
 
 
 function initialize(passport, getUserByEmail, getUserById){
 
     //Authentication function
     var authenticateUser = async function(email, password, done){
-            var user = getUserByEmail(email)
-            console.log(user);
+            var user = getUserByEmail(email) //get hash of email user entered
+            // console.log(user);
             if(user==null){
-                //No matching email
+                //No matching email in DB to user's email
                 return done(null, false, { message: "No user with that email" })
                 }
             try{
@@ -26,7 +26,6 @@ function initialize(passport, getUserByEmail, getUserById){
 
             }
     }
-
 
     passport.use(new LocalStrategy({ usernameField: 'userEmail', passwordField: "userPass"}, authenticateUser))
     
