@@ -11,8 +11,23 @@
 <body>
 
   <h1>New Account Creation</h1>
-
+  Devlinks:
+  <a href="/admin">Admin Page</a>
+  <a href="/manager">Manager Page</a>
+  <a href="/create">Create Page</a>
+  <a href="/login">Login Page</a>
+  <a href="/logout">Logout Page</a>
   <form action="/create" method="post" >
+    <li>
+      <label for="createFirst">First Name: </label>
+      <input type="text" id="createFirst" name="userFirst" placeholder="First Name" >
+     </li>  
+
+     <li>
+      <label for="createLast">Last Name: </label>
+      <input type="text" id="createLast" name="userLast" placeholder="Last Name" >
+     </li>  
+
     <li>
     <label for="createEmail">Email: </label>
     <input type="email" id="createEmail" name="userEmail" placeholder="Enter Email Here" >

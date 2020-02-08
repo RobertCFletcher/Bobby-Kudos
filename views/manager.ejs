@@ -10,10 +10,41 @@
 </head>
 
 <body>
+  Devlinks:
   <a href="/admin">Admin Page</a>
   <a href="/manager">Manager Page</a>
   <a href="/create">Create Page</a>
   <a href="/login">Login Page</a>
+  <a href="/logout">Logout Page</a>
 <h1>this is the Manager page</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>  Previous awards </th>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Region</th>
+      <th>Award</th>
+      <th>Recipient</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+    <tbody>
+      <%        awardData.forEach(function(ele, i){     %>
+        <tr>
+          <td> <%= awardData[i].id %> </td> 
+          <td> <%= awardData[i].timestamp.time %> </td>
+          <td> <%= awardData[i].region %> </td>
+          <td> <%= awardData[i].type %> </td>
+          <td> <%= awardData[i].recipientname %> </td>
+        </tr>  
+      <%        });                                    %>
+    </tbody>
+
+
+</table>
 </body>
 </html>
