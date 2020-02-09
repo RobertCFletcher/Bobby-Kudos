@@ -331,5 +331,5 @@
 //================LISTEN===============================
     const PORT = process.env.PORT || 31112;
     app.listen(PORT, function(){
-        console.log("Server started on port 31112")
+        console.log("Server started on port", PORT)
     });
