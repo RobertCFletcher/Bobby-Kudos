@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {
-    "devstart": "nodemon server.js", "start": "node server.js"
-  },
+  "scripts": 
+    {
+      "devstart": "nodemon server.js", "start": "node server.js"
+    },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": 
+  {
     "bcrypt": "^3.0.7",
-    "dotenv": "^8.2.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
@@ -18,8 +19,8 @@
     "express-session": "^1.17.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "request": "^2.88.0"
-  },
+    "request": "^2.88.0",
     "nodemon": "^2.0.2"
+    }
   }
-}
+
