@@ -12,6 +12,7 @@
         session = require('express-session'),
         passport = require("passport"),
         flash = require("express-flash");
+    require('dotenv').config()
     var LocalStrategy = require("passport-local").Strategy;         //Just need strategy from passport local
     var bcrypt = require("bcrypt");
     var request = require("request");                                     //used to hash/salt passwords and compare password hashes
