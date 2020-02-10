@@ -8,20 +8,14 @@
 
 <body>
 <%- include('partials/navbar') %>
-  <div class="page-heading">
-    <h1 class="text-center" style="width: ">KUDOS</h1>
-    <h3 class="text-center">Making employee recognition possible for the last week!</h3>
-  </div>
+<div class="page-heading">
+  <h3 class="text-center">Making employee recognition possible for the last week!</h3>
+</div>
 
   <% if (messages.error) { %>
   <%= messages.error %>
   <% } %>
-  Devlinks:
-  <a href="/admin">Admin Page</a>
-  <a href="/manager">Manager Page</a>
-  <a href="/create">Create Page</a>
-  <a href="/login">Login Page</a>
-  <a href="/logout">Logout Page</a>
+
   <div class="row">
     <div class="card mx-auto col-4">
       <h4 class="card-header">Please Login</h4>
