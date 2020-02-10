@@ -48,21 +48,26 @@
     }
     //================================================================    
     function testUser( user, password, done){
-
+            // console.log("password: ", password);
+            // console.log("recieved pass: ", user.password);
+            // console.log("bcrypt: ", bcrypt.compare(password, user.password))
                 if(user==null){
                    //No matching email in DB to user's email
+                //    console.log("user failed")
                    return done(null, false, { message: "No user with that email" })
                 }
-                if(bcrypt.compare(password, user.password)){
-                   //password correct, return authenticated user
-                   return done(null, user)
-                }
-                else {
+                bcrypt.compare(password, user.password).then(function(result){
+                   if(result == true){
+                    //     console.log("user passed")
+                        //password correct, return authenticated user
+                        return done(null, user)
+                    }
+                    else {
                     //password incorrect
-                    return done(null, false, { message: "Password is incorrect" })
-                }
-          
-    }
+                        // console.log("user failed")
+                    }
+                }    
+        )}
     
     //CALLING PASSPORT INITIALIZATION
     //==================================================================    
@@ -84,8 +89,16 @@
                     }
                     if (!error) 
                     {
-                        var personObj = JSON.parse(body);
-                        console.log(personObj);
+                        // console.log ("|", body, "|");
+                        if(body.trim() === "sql: no rows in result set")
+                        {
+                            body = null;
+                            // console.log("Get user by email- no results found")
+                        }
+                        else{
+                            // console.log("email matched")
+                            var personObj = JSON.parse(body);
+                        // console.log(personObj);
                         var user = {};
                         user.id= personObj.userid;
                         user.email = personObj.email;
@@ -97,7 +110,8 @@
                         else
                         {user.type = null}
                         user.createdby = personObj.createdby;
-                        console.log(user)
+                        }
+                        // console.log(user)
                         resolve(user);
                     }
                 });
