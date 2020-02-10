@@ -3,20 +3,17 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Create Account</title>
-  <link rel="stylesheet" href="#">
+    <%- include('partials/head') %>
 </head>
 
 <body>
+<%- include('partials/navbar') %>
+<div class="page-heading">
+    <h3 class="text-center">New Account Creation</h3>
+</div>
 
-  <h1>New Account Creation</h1>
-  Devlinks:
-  <a href="/admin">Admin Page</a>
-  <a href="/manager">Manager Page</a>
-  <a href="/create">Create Page</a>
-  <a href="/login">Login Page</a>
-  <a href="/logout">Logout Page</a>
+<div class="row">
+    <div class="card mx-auto col-4">
   <form action="/create" method="post" >
     <li>
       <label for="createFirst">First Name: </label>
@@ -46,6 +43,10 @@
    </li>
     <button>Create Account</button> 
   </form>
+    </div>
+</div>
 
+  <%- include('partials/footer') %>
+  <%- include('partials/footscripts') %>
 </body>
 </html>
