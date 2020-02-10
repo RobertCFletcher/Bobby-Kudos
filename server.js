@@ -211,7 +211,7 @@
 
     // LOGIN PAGE   
         app.get("/login", function(req, res){
-            res.render("login");
+            res.render("login", {pagetitle: "Login"});
         });
 
         app.post("/login", passport.authenticate("local",{
@@ -234,7 +234,7 @@
 
     // CREATE PAGE   
         app.get("/create", function(req, res){
-            res.render("create");
+            res.render("create", {pagetitle: "Account Creation"});
         });
 
         app.post("/create", async(req,res) => {
@@ -285,7 +285,7 @@
 
     // ADMIN PAGE   
         app.get("/admin", checkAuthenticated, requireRole("admin"), function(req, res){
-            res.render("admin.ejs");
+            res.render("admin.ejs", {pagetitle: "Admin"});
         });
 
     // MANAGER PAGE
@@ -310,7 +310,7 @@
                  recipientname: "Sarah Freeman"
                 }
             ]
-            res.render("manager.ejs",{awardData: tempData});
+            res.render("manager.ejs",{awardData: tempData, pagetitle: "Manager"});
         });
 
     //OTHER - gets user by ID
@@ -324,7 +324,7 @@
                 }
                 else{
                     console.log("ERROR- get user by Id")
-                    res.render("/badrequest");
+                    res.render("/badrequest", {pagetitle: "Error"});
                 }
             });
         })    

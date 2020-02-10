@@ -4,19 +4,14 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>DATA PAGE</title>
-  <link rel="stylesheet" href="#">
+  <%- include('partials/head') %>
 </head>
 
 <body>
-  Devlinks:
-  <a href="/admin">Admin Page</a>
-  <a href="/manager">Manager Page</a>
-  <a href="/create">Create Page</a>
-  <a href="/login">Login Page</a>
-  <a href="/logout">Logout Page</a>
-<h1>this is the Manager page</h1>
+  <%- include('partials/navbar') %>
+  <div class="page-heading">
+    <h3 class="text-center">this is the Manager page</h3>
+  </div>
 
 <table>
   <thead>
@@ -46,5 +41,8 @@
 
 
 </table>
+
+  <%- include('partials/footer') %>
+  <%- include('partials/footscripts') %>
 </body>
 </html>

@@ -6,7 +6,7 @@ manager accounts can be authenticated. Note passwords will only work if the bcry
 
 Sample login:
 
-man@serv.com
+man@serv
 1234
 
 Admin accounts can not currently be created or logged into.
