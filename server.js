@@ -275,6 +275,36 @@
                           res.redirect("/create")
                         });
                 }
+                if(req.body.accountType === "admin")
+                {
+                        var data = {
+                        firstname: req.body.userFirst,
+                        lastname: req.body.userLast,
+                        email: req.body.userEmail,
+                        password: hashedPass,
+                        createdby: 1
+                        }
+                        // console.log(data)
+                        // var bodySub = JSON.stringify(data)
+                        // console.log(formdata)
+
+                        var options = { method: 'POST',
+                          url: 'https://kudosapi.wl.r.appspot.com/users/admins',
+                          headers: 
+                           { 'cache-control': 'no-cache',
+                             'content-type': 'application/x-www-form-urlencoded' },
+                          form: false, 
+                          body: JSON.stringify(data)  
+                        };
+                        
+                        request(options, function (error, response, body) {
+                          if (error) throw new Error(error);
+                            
+                        //   console.log("Body", body);
+                        //   console.log("REsponse:", response)
+                          res.redirect("/create")
+                        });
+                }
             } 
             catch(error) {
                 res.redirect("/badrequest2")
