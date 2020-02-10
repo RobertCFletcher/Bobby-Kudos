@@ -15,32 +15,34 @@
 <div class="row">
     <div class="card mx-auto col-4">
   <form action="/create" method="post" >
-    <li>
-      <label for="createFirst">First Name: </label>
-      <input type="text" id="createFirst" name="userFirst" placeholder="First Name" >
-     </li>  
+      <ul>
+          <li>
+              <label for="createFirst">First Name: </label>
+              <input type="text" id="createFirst" name="userFirst" placeholder="First Name" >
+          </li>
 
-     <li>
-      <label for="createLast">Last Name: </label>
-      <input type="text" id="createLast" name="userLast" placeholder="Last Name" >
-     </li>  
+          <li>
+              <label for="createLast">Last Name: </label>
+              <input type="text" id="createLast" name="userLast" placeholder="Last Name" >
+          </li>
 
-    <li>
-    <label for="createEmail">Email: </label>
-    <input type="email" id="createEmail" name="userEmail" placeholder="Enter Email Here" >
-   </li>  
+          <li>
+              <label for="createEmail">Email: </label>
+              <input type="email" id="createEmail" name="userEmail" placeholder="Enter Email Here" >
+          </li>
 
-   <li>
-    <label for="createPassword">Password</label>
-    <input type="password" id="createPassword" name="userPass" placeholder="Enter Password" >
-   </li>
+          <li>
+              <label for="createPassword">Password</label>
+              <input type="password" id="createPassword" name="userPass" placeholder="Enter Password" >
+          </li>
 
-   <li>
-    <input type="radio" id="adminRadio" name="accountType" value="admin">
-    <label for="adminRadio">Admin Account</label>
-    <input type="radio" id="mangRadio" name="accountType" value="manager">
-    <label for="mangRadio">Manager Account</label>
-   </li>
+          <li>
+              <input type="radio" id="adminRadio" name="accountType" value="admin">
+              <label for="adminRadio">Admin Account</label>
+              <input type="radio" id="mangRadio" name="accountType" value="manager">
+              <label for="mangRadio">Manager Account</label>
+          </li>
+      </ul>
     <button>Create Account</button> 
   </form>
     </div>
