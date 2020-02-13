@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+<%- include('partials/navbar') %>
+<script>  document.getElementById("link6").classList.add("active") 
+          document.getElementById("link1").remove()  
+          document.getElementById("link3").remove() 
+          document.getElementById("link4").remove()
+
+</script>
+<div class="page-heading">
+    <h3 class="text-center">New Account Creation</h3>
+</div>
+
+<div class="row">
+    <div class="card mx-auto col-4">
+        <form action="/awards" method="POST">
+            <li>
+              <label for="reg"> Region: </label>
+              <input type="number" id="reg" name="region" placeholder="Region" >
+            </li>
+            <li>
+              <label for="typ"> Type: </label>
+              <input type="text" id="typ" name="type" placeholder="Award Type" >
+            </li>
+            <li>
+              <label for="name"> Recipient Name: </label>
+              <input type="text" id="name" name="recipientname" placeholder="Recipient Full Name" >
+            </li>
+            <li>
+              <label for="email1"> Recipient Email: </label>
+              <input type="email" id="email1" name="recipientemail" placeholder="Recipient Email" >
+            </li>
+            <button>Create Award</button>
+          </form>
+    </div>
+</div>
+
+  <%- include('partials/footer') %>
+  <%- include('partials/footscripts') %>
+</body>
+</html>

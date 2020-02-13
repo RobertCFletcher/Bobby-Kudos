@@ -26,3 +26,7 @@ mon@admin.com
 
 Sart server with nodemon with "npm run devstart"
 Server is hardcoded to run on port 31112 unless env var PORT is definied. 
+
+-4 pages to create modify admin, modify manager, delete admin, delete manager
+-create account express flash
+-create account - add created by to post request

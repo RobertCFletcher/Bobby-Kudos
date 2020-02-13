@@ -8,6 +8,11 @@
 
 <body>
 <%- include('partials/navbar') %>
+<script>  document.getElementById("link3").classList.add("active") 
+          document.getElementById("link2").remove()  
+          document.getElementById("link4").remove()
+          document.getElementById("link6").remove()
+</script>
 <div class="page-heading">
     <h3 class="text-center">New Account Creation</h3>
 </div>
@@ -39,7 +44,7 @@
           <li>
               <input type="radio" id="adminRadio" name="accountType" value="admin">
               <label for="adminRadio">Admin Account</label>
-              <input type="radio" id="mangRadio" name="accountType" value="manager">
+              <input type="radio" id="mangRadio" name="accountType" value="manager" checked="checked">
               <label for="mangRadio">Manager Account</label>
           </li>
       </ul>
