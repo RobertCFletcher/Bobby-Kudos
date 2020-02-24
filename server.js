@@ -517,8 +517,154 @@
 
     });
 
+    //AWARD STATS
+    app.get("/stats", checkAuthenticated, requireRole("manager"), function(req, res){
+        //Chart1 = Local awards given
+        //Chart2= Total awards given
+        //Chart3= Awards by region
+        //Chart4= Most Awarded Employees
+        // console.log("user: ", req.user.id);
+        request("https://kudosapi.wl.r.appspot.com/awards/", function (error, response, body){
+            // console.log(body)
+            //Parse Awards Data from API
+            awardData = [];
+            if(body.trim() === "sql: no rows in result set")
+            {
+                awardData = [];
+            }
+            else
+            {
+                awardData = JSON.parse(body);
+                // console.log(awardData)
+            }
+            //Create Array of the last 10 days
+            var pastTen = [];
+            curdate = new Date;
+            curdate.setHours(0,0,0,0)
+            pastTen[0] = curdate;
+            for (var i = 1; i < 10; i++ ){
+                pastTen[i] = new Date
+                pastTen[i].setDate( pastTen[i-1].getDate() - 1 )
+                pastTen[i].setHours(0,0,0,0)
+            }
+
+            //Create Arrays for chart 1 and 2
+                chart1data = [];
+                chart2data = [];
+
+                //Fill chart1/chart2 arrays with date data and number of awards
+                for(var j = 0; j < 10; j++)
+                {
+                    chart1data[j] = [];
+                    chart2data[j] = [];
+                    chart1data[j][0] = pastTen[j].getFullYear();
+                    chart2data[j][0] = pastTen[j].getFullYear(); 
+                    chart1data[j][1] = pastTen[j].getMonth();
+                    chart2data[j][1] = pastTen[j].getMonth();
+                    chart1data[j][2] = pastTen[j].getDate();
+                    chart2data[j][2] = pastTen[j].getDate();
+                    var countGlobal = 0;
+                    var countLocal = 0;
+                    for (var i = 0; i < awardData.length; i++)
+                    {
+                        var testDate = (new Date(awardData[i].timestamp.Time));
+                        testDate.setHours(0,0,0,0); 
+                        matchDate = pastTen[j];
+                        // console.log("MatchTime: ", matchDate.getTime());   
+                        // console.log("TestTime : ", testDate.getTime());
+                        if(testDate.getTime()===matchDate.getTime())   
+                                 {   
+                                   //if match increment global counter   
+                                   countGlobal++;   
+                                    if(req.user.id === awardData[i].creatorid)     
+                                    {                                
+                                     //if id match increment local counter  
+                                     countLocal[1]++;               
+                                    }
+                                 }   
+                    }
+                    chart2data[j][3] = countGlobal;
+                    chart1data[j][3] = countLocal;
+                }
+
+            //Chart 3 data gathering
+                  //get all regions
+                var regions = []
+                for(var j = 0; j < awardData.length; j++)
+                {
+                    if(!regions.includes(awardData[j].region) ){
+                        regions.push(awardData[j].region)
+                    }
+                }
+                  //count number of each region
+                var chart3data = [];
+                for(var j = 0; j < regions.length; j++)
+                {
+                    chart3data[j] = [];
+                    chart3data[j][0] = "Region " + j;
+                    var count = 0;
+                    for(var i = 0; i < awardData.length; i++ )
+                    {
+                        if(awardData[i].region === j)
+                        {  count++;  }
+                    }
+                    chart3data[j][1] = count;
+                }
+
+                console.log(chart3data);
+
+            //Chart 4 data gathering
+                  //get the recipient names
+                var recipients = []
+                for(var j = 0; j < awardData.length; j++)
+                {
+                    if(!recipients.includes(awardData[j].recipientname) ){
+                        recipients.push(awardData[j].recipientname)
+                    }
+                }
+                console.log(recipients);
+                  //count number of recipient awards
+                chart4objs = [];
+                for(var j = 0; j < recipients.length; j++)
+                {
+                    chart4objs[j] = {};
+                    chart4objs[j].name = recipients[j];
+                    var count = 0;
+                    for(var i = 0; i < awardData.length; i++ )
+                    {
+                        if(awardData[i].recipientname === recipients[j])
+                        {  count++;  }
+                    }
+                    chart4objs[j].awards = count;
+                }
+
+                //sort recipients by award number
+                chart4objs.sort((a,b) => (a.awards < b.awards) ? 1 : -1);
+
+                // Select number of recipients to show
+                awardsShown = 5;
+                if(awardsShown > chart4objs.length)
+                {awardsShown = chart4objs.length}
+
+                //Transfer recipients that will be shown to new array
+                chart4data = []
+                for(var j= 0; j < awardsShown; j++)
+                {
+                    chart4data[j]=[];
+                    chart4data[j][0] = chart4objs[j].name;
+                    chart4data[j][1] = chart4objs[j].awards;
+                }
+
+                    chart1data =  JSON.stringify(chart1data);
+                    chart2data =  JSON.stringify(chart2data);
+                    chart3data =  JSON.stringify(chart3data);
+                    chart4data =  JSON.stringify(chart4data);
+
+            res.render("stats.ejs", {pagetitle: "Award Statistics", userNum: req.user.id, chart1data: chart1data, chart2data: chart2data, chart3data: chart3data, chart4data: chart4data});
+        });
 
 
+    });
             
 
 

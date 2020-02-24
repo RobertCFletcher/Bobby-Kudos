@@ -1,0 +1,181 @@
+<!doctype html>
+
+
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+  <link rel="stylesheet" type="text/css" href="login.css" >
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+</head>
+
+<body>
+  <%- include('partials/navbar') %>
+  <script>  document.getElementById("link7").classList.add("active") 
+            document.getElementById("link1").remove()
+            document.getElementById("link3").remove()
+            document.getElementById("link4").remove()
+</script>
+  <div class="page-heading">
+    <h3 class="text-center ">Awards Statistics</h3>
+  </div>
+  <div id=userNumber hidden><%=userNum%></div>
+<div class="row">
+  <div class="card col-lg-6">
+    <h6 class="card-header">Your Awards Given Per Day(Last 90 Days)</h6>
+    <div class="card-body">
+      <div id="chart_1"></div>
+    </div>
+  </div>
+  <div class="card col-lg-6">
+    <h6 class="card-header">Total Awards Given Per Day-Sitewide (Last 90 Days)</h6>
+    <div class="card-body">
+      <div class="card-body">
+        <div id="chart_2"></div>
+      </div>
+    </div>
+  </div>
+</div> 
+<div class="row">
+  <div class="card col-lg-6">
+    <h6 class="card-header">Total Awards Given By Region</h6>
+    <div class="card-body">
+      <div class="card-body">
+        <div id="chart_3"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card col-lg-6">
+    <h6 class="card-header">Most Awarded Employees</h6>
+    <div class="card-body">
+      <div class="card-body">
+        <div id="chart_4"></div>
+      </div>
+    </div>
+  </div>
+</div> 
+  <%- include('partials/footer') %>
+  <%- include('partials/footscripts') %>
+
+
+
+<script> 
+
+      google.charts.load('current', {'packages':['corechart']});
+
+
+      var c1dataTemp = <%- chart1data %>;
+      var c2dataTemp = <%- chart2data %>;
+      var c1data = []
+      var c2data = []
+      var c3data = <%- chart3data %>;
+      var c4data = <%- chart4data %>;
+
+      for(var i = 0; i < c1dataTemp.length; i++){
+        c1data[i] = [];
+        c1data[i][0] = new Date(c1dataTemp[i][0], c1dataTemp[i][1], c1dataTemp[i][2] );
+        c1data[i][1] = c1dataTemp[i][3];
+      };
+      for(var i = 0; i < c2dataTemp.length; i++){
+        c2data[i] = [];
+        c2data[i][0] = new Date(c2dataTemp[i][0], c2dataTemp[i][1], c2dataTemp[i][2] );
+        c2data[i][1] = c2dataTemp[i][3];
+      };
+
+        console.log(c1data);
+        console.log(c2data);
+        console.log(c3data);
+        console.log(c4data);
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart1);
+      google.charts.setOnLoadCallback(drawChart2);
+      google.charts.setOnLoadCallback(drawChart3);
+      google.charts.setOnLoadCallback(drawChart4);
+
+      //CHART1 - Local account awards given - last 90 days
+      function drawChart1() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Awards Given By You');
+        data.addRows( c1data );
+
+        // Set chart options
+        var options = {'title':'The awards you sent each day (previous 10 days)',
+                      'width':600,
+                      'height':400};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.getElementById('chart_1'));
+        chart.draw(data, options);
+      }
+
+      //CHART2 - Total Awards given - sitewide last 90 days
+      function drawChart2() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'All Users Given Awards');
+        data.addRows(c2data);
+
+        // Set chart options
+        var options = {'title':'The total awards sent by all users each day (previous 10 days)',
+                      'width':600,
+                      'height':400};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.getElementById('chart_2'));
+        chart.draw(data, options);
+      }
+
+      //CHART3 - Total Awards By Region
+      function drawChart3() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Region');
+        data.addColumn('number', 'Awards');
+        data.addRows(c3data);
+
+        // Set chart options
+        var options = {'title':'Total Awards Given By Region',
+                      'width':600,
+                      'height':400};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_3'));
+        chart.draw(data, options);
+      }
+
+      //CHART4 - Most Awarded employees
+      function drawChart4() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Recipient');
+        data.addColumn('number', 'Total Awards');
+        data.addRows(c4data);
+
+        // Set chart options
+        var options = {'title':'Top 5 Reward Recipients',
+                      'width':600,
+                      'height':400,
+                      vAxis: {title: 'Recipient'},
+                      hAxis: {title: 'Awards Recieved'} 
+                    };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_4'));
+        chart.draw(data, options);
+      }
+          
+</script>
+
+
+</body>
+
+</html>
