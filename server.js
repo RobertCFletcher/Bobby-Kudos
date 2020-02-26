@@ -234,7 +234,8 @@
         });
 
     // CREATE PAGE   
-        app.get("/create", checkAuthenticated, requireRole("admin"), function(req, res){
+        //app.get("/create", checkAuthenticated, requireRole("admin"), function(req, res){
+        app.get("/create", function(req, res){
             res.render("create", {pagetitle: "Account Creation"});
         });
 
@@ -462,7 +463,7 @@
     // MANAGER PAGE
         app.get("/manager", checkAuthenticated, requireRole("manager"), function(req, res){
 
-            userRequest = "https://kudosapi.wl.r.appspot.com/awards/" + req.user.id;
+            userRequest = "https://kudosapi.wl.r.appspot.com/awards";
             // console.log("user: ", req.user.id);
             request(userRequest, function (error, response, body){
                 // console.log(body)
@@ -481,9 +482,14 @@
                     parsedData = tempArray;
                 }
                 // console.log(typeof(parsedData));
-                var tempData
+                var tempData = []
+                for(var j=0; j<parsedData.length; j++)
+                {
+                    if(parsedData[j].creatorid == req.user.id)
+                    tempData.push(parsedData[j]);
+                }
                 // console.log(parsedData);
-                res.render("manager.ejs",{awardData: parsedData, pagetitle: "Manager"});
+                res.render("manager.ejs",{awardData: tempData, pagetitle: "Manager"});
             });
         });
     //CREATE NEW AWARD
@@ -494,11 +500,11 @@
     app.post("/awards", checkAuthenticated, requireRole("manager"), function(req, res){
 
             var updateParams = {
-                region: req.body.region,
+                region: {regionid: req.body.region },
                 type: req.body.type,
                 recipientname: req.body.recipientname,
                 recipientemail: req.body.recipientemail,
-                creatorid: req.user.id
+                createdby: {userid: req.user.id }
                 };
             console.log(updateParams);
             bodyString = JSON.stringify(updateParams);
@@ -576,10 +582,13 @@
                                  {   
                                    //if match increment global counter   
                                    countGlobal++;   
+
+                                    // awardData[i].creatorid = 13;
                                     if(req.user.id === awardData[i].creatorid)     
-                                    {                                
+                                    {
+
                                      //if id match increment local counter  
-                                     countLocal[1]++;               
+                                     countLocal++;               
                                     }
                                  }   
                     }
@@ -611,7 +620,7 @@
                     chart3data[j][1] = count;
                 }
 
-                console.log(chart3data);
+                // console.log(chart3data);
 
             //Chart 4 data gathering
                   //get the recipient names
@@ -622,7 +631,7 @@
                         recipients.push(awardData[j].recipientname)
                     }
                 }
-                console.log(recipients);
+                // console.log(recipients);
                   //count number of recipient awards
                 chart4objs = [];
                 for(var j = 0; j < recipients.length; j++)
