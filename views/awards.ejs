@@ -21,23 +21,34 @@
 <div class="row">
     <div class="card mx-auto col-4">
         <form action="/awards" method="POST">
-            <li>
+            <!-- <li>
               <label for="reg"> Region: </label>
               <input type="number" id="reg" name="region" placeholder="Region" >
-            </li>
+            </li> -->
+
+            <label for="selectRegion">Select Region:</label>
+            <select class="custom-select" id="selectRegion" name="region" required>
+            <option selected disabled>Choose Region...</option>
+                <%        regions.forEach(function(ele, i){       %>
+            <option value="<%= ele.regionid %>">
+                <%=     ele.regionname                           %> 
+                <%        })       %>
+                </option>
+            </select>
+
             <li>
-              <label for="typ"> Type: </label>
+              <label for="typ"> Award: </label>
               <input type="text" id="typ" name="type" placeholder="Award Type" >
             </li>
             <li>
               <label for="name"> Recipient Name: </label>
-              <input type="text" id="name" name="recipientname" placeholder="Recipient Full Name" >
+              <input type="text" id="name" name="recipientname" placeholder="Full Name" >
             </li>
             <li>
               <label for="email1"> Recipient Email: </label>
               <input type="email" id="email1" name="recipientemail" placeholder="Recipient Email" >
             </li>
-            <button>Create Award</button>
+            <button class="btn btn-primary">Create Award</button>
           </form>
     </div>
 </div>

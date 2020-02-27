@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+  <link rel="stylesheet" type="text/css" href="login.css" >
+  <!-- <script src="plugins/signhere/jSignature.SignHere.js"></script>  -->
+</head>
+
+<body>
+<%- include('partials/navbar') %>
+<script>  document.getElementById("link8").classList.add("active") 
+          document.getElementById("link1").remove()
+          document.getElementById("link4").remove()
+          document.getElementById("link3").remove()
+</script>
+
+<h5 class="bg-success text-center">Signature Accepted</h5>
+<div class="card">
+<img src="signatures/sig<%=userNum%>.svg" alt="userSig">
+</div>
+<a href="/sig"><button class="btn btn-primary">Remake</button></a>
+
+<%- include('partials/footer') %>
+<%- include('partials/footscripts') %>
+</body>
+</html>
+

@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+  <link rel="stylesheet" type="text/css" href="login.css" >
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> 
+  <script src="jSignature.js"></script>
+  <script src="plugins/jSignature.CompressorBase30.js"></script>
+	<script src="plugins/jSignature.CompressorSVG.js"></script>
+	<script src="plugins/jSignature.UndoButton.js"></script>
+  <!-- <script src="plugins/signhere/jSignature.SignHere.js"></script>  -->
+</head>
+
+<body>
+<%- include('partials/navbar') %>
+<script>  document.getElementById("link8").classList.add("active") 
+          document.getElementById("link1").remove()
+          document.getElementById("link4").remove()
+          document.getElementById("link3").remove()
+</script>
+
+<h5 class="bg-info text-center">Draw your signature below to use on your Award PDFs</h5>
+
+<div class="bg-dark " id="signatureparent">
+  <div>
+  <div class=" bg-light d-flex justify-column-center" id="signature"></div>
+</div>
+</div>
+<button class="btn btn-primary" id="acceptSig">Save</button>
+<a href="/sig"><button class="btn btn-primary" id="clearSig">Clear</button></a>
+<img src="" alt="" id=acceptedSig>
+
+<form name="svgform" method="post" action="/sig">
+  <input type="hidden" name="svgEncode" id=svgIn>
+</form>
+
+
+<script type="text/javascript">
+$("#signature").jSignature({
+  resetButton: $("#clearsig"),
+  width: 2600,
+  height: 300,
+  linewidth: 5
+})
+
+var $sigdiv = $("#signature")
+
+// var resetbtn = document.getElementById("clearSig");
+// resetbtn.addEventListener("click", function(){$sigdiv.jSignature('clear'); $sigdiv.jSignature('destroy')});
+
+var acceptbtn = document.getElementById("acceptSig");
+acceptbtn.addEventListener("click", function(){	
+  var datapair = $sigdiv.jSignature("getData", "svgbase64") 
+  console.log("Data: ", datapair);
+  document.getElementById("svgIn").value = datapair[1];
+  document.svgform.submit();
+}); // append the image (SVG) to DOM.});
+</script>
+
+
+<%- include('partials/footer') %>
+<%- include('partials/footscripts') %>
+</body>
+</html>
+
