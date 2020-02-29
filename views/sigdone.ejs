@@ -15,8 +15,12 @@
           document.getElementById("link4").remove()
           document.getElementById("link3").remove()
 </script>
-
+<% if(result != 0){ %>
 <h5 class="bg-success text-center">Signature Accepted</h5>
+<% } else { %>
+  <h5 class="bg-danger text-center">Signature Addition Failure - Please Try Again</h5>
+<% } %>  
+
 <div class="card">
 <img src="signatures/sig<%=userNum%>.svg" alt="userSig">
 </div>

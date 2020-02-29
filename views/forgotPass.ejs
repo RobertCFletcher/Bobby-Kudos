@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+  <link rel="stylesheet" type="text/css" href="login.css" >
+</head>
+
+<body>
+<%- include('partials/navbar') %>
+<script>  document.getElementById("link4").classList.add("active") 
+          document.getElementById("link1").remove()
+          document.getElementById("link2").remove()
+          document.getElementById("link3").remove()
+          document.getElementById("link5").remove()
+          document.getElementById("link6").remove()
+          document.getElementById("link7").remove()
+          document.getElementById("link8").remove()
+          document.getElementById("link9").remove()
+</script>
+
+<div class="page-heading">
+  <h3 class="text-center">Making employee recognition possible for the last week!</h3>
+</div>
+
+
+
+  <div class="row">
+    <div class="card mx-auto col-4">
+      <h4 class="card-header">Please Login</h4>
+      <% if (messages.error) { %>
+        <%= messages.error %>
+        <% } %>
+      <form action="/login" method="post" >
+        <li>
+          <label for="authEmail">Email: </label>
+          <input type="email" id="authEmail" name="userEmail" placeholder="Enter Email Here" >
+        </li>  
+
+        <li>
+          <label for="createPassword">Password</label>
+          <input type="password" id="createPassword" name="userPass" placeholder="Enter Password" pattern=".{4,}" >
+        </li>
+
+        <input type="Submit" class="btn btn-primary" value="Login">
+        <button type="button" class="btn btn-secondary">Forgot Password</button>
+      </form>
+    </div> 
+  </div>
+
+<%- include('partials/footer') %>
+<%- include('partials/footscripts') %>
+</body>
+</html>
+

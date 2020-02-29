@@ -17,6 +17,11 @@
     var bcrypt = require("bcrypt");
     var request = require("request");                                     //used to hash/salt passwords and compare password hashes
     var base64Img = require("base64-img");
+    var fs = require("fs-extra");
+    var svg2img = require("svg2img");
+    var btoa = require("btoa");
+
+
     var app = express();
 
     // PASSPORT INITIALIZATION FUNCTION
@@ -202,6 +207,11 @@
 
         }));
 
+        app.get("/forgot", function(req, res){
+            res.render("forgotPass", {pagetitle: "Recover Password"});
+        });
+
+
     // LOGIN SUCCESS
         app.get("/loginSuccess", checkAuthenticated, function(req,res){
             if(req.user.type==="admin")
@@ -218,7 +228,7 @@
             res.render("create", {pagetitle: "Account Creation"});
         });
 
-        // app.post("/create", async(req,res) => {
+        
         app.post("/create", checkAuthenticated, requireRole("admin"), async(req,res) => {
             // "accountType" is {"admin" or "manager"}
             // console.log(req.body.userEmail); console.log(req.body.userPass); console.log(req.body.accountType);
@@ -434,9 +444,11 @@
     // MANAGER PAGE
         app.get("/manager", checkAuthenticated, requireRole("manager"), function(req, res){
 
-            userRequest = "https://kudosapi.wl.r.appspot.com/awards";
+            userRequest = "https://kudosapi.wl.r.appspot.com/awards/" ;
+            // console.log(userRequest)
             // console.log("user: ", req.user.id);
             request(userRequest, function (error, response, body){
+                // console.log(body)
                 // console.log(body)
                 if(body.trim() === "sql: no rows in result set")
                 {
@@ -454,15 +466,18 @@
                 }
                 // console.log(typeof(parsedData));
                 var tempData = []
+                // console.log(parsedData)
                 for(var j=0; j<parsedData.length; j++)
                 {
-                    if(parsedData[j].creatorid == req.user.id)
+                    if(parsedData[j].createdby.userid == req.user.id)
                     tempData.push(parsedData[j]);
                 }
                 // console.log(parsedData);
                 res.render("manager.ejs",{awardData: tempData, pagetitle: "Manager"});
             });
         });
+
+
     //CREATE NEW AWARD
     app.get("/awards", checkAuthenticated, requireRole("manager"), function(req, res){
         request("https://kudosapi.wl.r.appspot.com/awards/regions", function (error, response, bodysub){
@@ -475,7 +490,7 @@
     app.post("/awards", checkAuthenticated, requireRole("manager"), function(req, res){
 
             var updateParams = {
-                region: {regionid: req.body.region },
+                region: {regionid: Number(req.body.region) },
                 type: req.body.type,
                 recipientname: req.body.recipientname,
                 recipientemail: req.body.recipientemail,
@@ -483,20 +498,39 @@
                 };
             // console.log(updateParams);
             bodyString = JSON.stringify(updateParams);
-            // console.log(bodyString)
+            console.log(bodyString)
             var options = { method: 'POST',
-                url: 'https://kudosapi.wl.r.appspot.com/awards/'+req.params.modNum,
+                url: 'https://kudosapi.wl.r.appspot.com/awards/',
                 headers: { 'cache-control': 'no-cache' },
                 body:bodyString
                 };
             request(options, function (error2, response2, body2) {
                 if (error2) throw new Error(error2);
-                console.log(response2)
-                console.log("body|||||", body2)
+                // console.log(response2)
+                // console.log("body|||||", body2)
                 res.redirect("/manager")
 
             });
 
+    });
+
+   //DELETE AWARD 
+   app.get("/manager/deleteaward/:modNum", checkAuthenticated, requireRole("manager"), function(req, res){
+        res.render("awardDelete.ejs", {pagetitle: "DeleteAward", AwardNum: req.params.modNum});
+    });
+
+
+    app.get("/manager/deleteaward/bye/:modNum", checkAuthenticated, requireRole("manager"), function(req, res){
+        userRequest = "https://kudosapi.wl.r.appspot.com/awards/" + req.params.modNum;
+        var options = { method: 'DELETE',
+        url: userRequest,
+        headers: 
+        { 'cache-control': 'no-cache' } }; 
+        request(options, function (error, response, body) {
+        if (error){ throw new Error(error)}
+        else{
+            res.redirect("/manager")}
+    });
     });
 
     //AWARD STATS
@@ -560,7 +594,7 @@
                                    countGlobal++;   
 
                                     // awardData[i].creatorid = 13;
-                                    if(req.user.id === awardData[i].creatorid)     
+                                    if(req.user.id === awardData[i].createdby.userid)     
                                     {
 
                                      //if id match increment local counter  
@@ -668,10 +702,6 @@
         res.render("sig.ejs", {pagetitle: "Update Signature"});
     });
 
-    app.get("/sigdone", checkAuthenticated, requireRole("manager"), function(req, res){
-        res.render("sigdone.ejs", {pagetitle: "Update Signature", userNum: req.user.id});
-    });
-
     app.post("/sig", checkAuthenticated, requireRole("manager"), function(req, res){
 
         var updateParams ={ image:  req.body.svgEncode,
@@ -679,28 +709,54 @@
 
             console.log(updateParams);
 
+            try{
+                //create svg file from svg base64 encode in "public/signatures" folder
                 base64Img.img("data:image/svg;base64," + updateParams.image, "public/signatures", "sig" + updateParams.id, function(err, filepath)
                 {
+                    //convert from svg to png
+                    pathtosave = "public/signatures/sig"+req.user.id+".svg";
+                    saveas = "public/signatures/sig"+req.user.id+".png"
+                    svg2img(pathtosave, function(error, buffer) {
+                        fs.writeFileSync(saveas, buffer);
 
-                res.redirect("/sigdone");
+                        //send png in request
+                        var pngReadStream = 'fs.createReadStream("sig' +req.user.id + '.png")';
+                        var fname = "sig" + req.user.id + ".png";
+                        console.log(pngReadStream);
+                        console.log(fname);
+                        var options = { method: 'POST',
+                        url: 'https://kudosapi.wl.r.appspot.com/users/managers/' + req.user.id +'/signature',
+                        qs: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        headers: 
+                         { 'cache-control': 'no-cache',
+                           'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' },
+                        formData: 
+                         { image: 
+                            { value: pngReadStream, //'fs.createReadStream("sig87.png")',
+                              options: { filename: fname, contentType: null } } } };
+                      
+                        request(options, function (error, response, body) {
+                            if (error) throw new Error(error);
+                        
+                            console.log(body);
+                            res.render("sigdone.ejs", {pagetitle: "Update Signature", userNum: req.user.id, result: body.userid });
+                        });
 
-            });
+                     
+                        
+                    });
+                });
+            }    
+            
+            catch(error){    
+                console.log(error)
+                    res.render("sigdone.ejs", {pagetitle: "Update Signature", userNum: req.user.id, result: 0 })
+                 }
+        });
 
 
-        // bodyString = JSON.stringify(updateParams);
-        // var options = { method: 'POST',
-        //     url: 'https://kudosapi.wl.r.appspot.com/awards/'+req.params.modNum,
-        //     headers: { 'cache-control': 'no-cache' },
-        //     body:bodyString
-        //     };
-        // request(options, function (error2, response2, body2) {
-        //     if (error2) throw new Error(error2);
-        //     // console.log(response2)
-        //     res.redirect("/manager")
 
-        // });
 
-});
     //UPDATE PASSWORD
     app.get("/account", checkAuthenticated, function(req, res){  
         res.render("account.ejs", {pagetitle: "Update Account", type: JSON.stringify(req.user.type)});

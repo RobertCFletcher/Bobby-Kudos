@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+
+</head>
+<%- include('partials/navbar') %>
+
+<script>   
+          document.getElementById("link1").remove()
+          document.getElementById("link4").remove()
+          document.getElementById("link6").remove()
+          document.getElementById("link7").remove()
+          document.getElementById("link8").remove()
+          document.getElementById("link3").remove()
+
+</script>
+
+
+<body>
+
+
+        <h4>Are you sure you want to delete Award <%=AwardNum %>?</h4>
+
+      <a href="/manager/deleteaward/bye/<%=AwardNum%>"><button type="button" class="btn btn-danger">Delete Award</button></a>
+      <a href="/manager"><button type="button" class="btn btn-secondary">Cancel</button></a>
+
+     
+
+
+  <%- include('partials/footer') %>
+  <%- include('partials/footscripts') %>
+</body>
+</html>

@@ -31,17 +31,19 @@
       <th>Award</th>
       <th>Recipient</th>
       <th>Email</th>
+      <th>Delete</th>
     </tr>
   </thead>
     <tbody>
       <%        awardData.forEach(function(ele, i){     %>
         <tr>
           <td> <%= awardData[i].id %> </td> 
-          <td> <%= awardData[i].timestamp.Time %> </td>
-          <td> <%= awardData[i].region %> </td>
+          <td> <%= awardData[i].createdon.Time %> </td>
+          <td> <%= awardData[i].region.regionname %> </td>
           <td> <%= awardData[i].type %> </td>
           <td> <%= awardData[i].recipientname %> </td>
           <td> <%= awardData[i].recipientemail %> </td>
+          <td><a href="/manager/deleteaward/<%=awardData[i].id%>">Delete</a></td>
         </tr>  
       <%        });                                    %>
     </tbody>
