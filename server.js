@@ -19,10 +19,17 @@
     var base64Img = require("base64-img");
     var fs = require("fs-extra");
     var svg2img = require("svg2img");
-    var btoa = require("btoa");
-
-
     var app = express();
+    var nodemailer = require('nodemailer');
+
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'kudos.reauth@gmail.com',
+          pass: '2kudospass@4'
+        }
+      });
 
     // PASSPORT INITIALIZATION FUNCTION
     //  Authentication function 
@@ -188,7 +195,6 @@
 
 // ROUTES
 //=============================================== 
-
     // HOME REDIRECT
         app.get("/", function(req,res){
             res.redirect("/login")
@@ -207,10 +213,97 @@
 
         }));
 
+    //Forgot Password        
         app.get("/forgot", function(req, res){
             res.render("forgotPass", {pagetitle: "Recover Password"});
         });
 
+        app.post("/forgot", function(req, res){
+            userRequest = "https://kudosapi.wl.r.appspot.com/users/";
+            request(userRequest, async function (error, response, body){
+                var resetList = { userID: 0, userType: "", userHash: "", userEmail: req.body.userEmail}
+                bodyParsed = JSON.parse(body);
+                
+                //check if account exists
+                for(var j = 0; j < bodyParsed.length; j++)
+                {   if(bodyParsed[j].email === resetList.userEmail)
+                    {
+                        resetList.userID = bodyParsed[j].userid
+                        resetList.userType = bodyParsed[j].usertype
+                        break;                  
+                    }
+                }
+                //if email not found then redirect to login
+                if(resetList.userID === 0)
+                    {res.redirect("/login")}
+
+                //generate temp password
+                var hashLength = 12;
+                var result = ""
+                var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                var charactersLength = characters.length;
+                for ( var i = 0; i < hashLength; i++ ) {
+                   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                console.log(result);
+
+                //send email
+                var mailOptions = {
+                    from: 'kudos.reauth@gmail.com',
+                    to: resetList.userEmail,
+                    subject: 'Kudos Password Reset Request',
+                    text: 'A request was submitted to reset the password for your Kudos account. Your new password is: ' + result + '\nPlease login to your Kudos account and change your password as soon as possible.'
+                  };
+                  
+                  transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                    }
+                  }); 
+
+                  //reset password
+                try{    newpassword = await bcrypt.hash(result, 10) 
+                    userRequest = "https://kudosapi.wl.r.appspot.com/users/" + resetList.userType +"s/" + resetList.userID;
+                    request(userRequest, function (error2, response2, body2){
+                        bodyParsed = JSON.parse(body2);
+                        var updateParams = {
+                            email: bodyParsed.email,
+                            password: newpassword
+                            };
+                        if(resetList.userType === "manager")
+                        {
+                            updateParams.firstname = bodyParsed.firstname;
+                            updateParams.lastname = bodyParsed.lastname;
+                        }
+                        bodyString = JSON.stringify(updateParams);
+                        console.log(bodyString)
+                        var options = { method: 'PUT',
+                        url: 'https://kudosapi.wl.r.appspot.com/users/'+ resetList.userType + "s/" +resetList.userID,
+                        headers: { 'cache-control': 'no-cache' },
+                        body:bodyString
+                        };
+                        console.log(options);    
+                        request(options, function (error2, response2, body2) {
+                            if (error2) throw new Error(error2);
+                                {res.redirect("/login");}
+
+                        });
+                    });
+            }
+            catch(error){
+                console.log(error);
+                redirect("/badrequest")
+            } 
+                
+
+
+
+
+            });
+        });
+    
 
     // LOGIN SUCCESS
         app.get("/loginSuccess", checkAuthenticated, function(req,res){
@@ -720,7 +813,7 @@
                         fs.writeFileSync(saveas, buffer);
 
                         //send png in request
-                        var pngReadStream = 'fs.createReadStream("sig' +req.user.id + '.png")';
+                        var pngReadStream = fs.createReadStream("public/signatures/sig" +req.user.id + ".png");
                         var fname = "sig" + req.user.id + ".png";
                         console.log(pngReadStream);
                         console.log(fname);
