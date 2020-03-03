@@ -1,0 +1,185 @@
+#admin{
+	background-color: rgb(241, 241, 242);
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	font-family: 'Spartan';
+	font-size: 12px;
+	padding-bottom: 3%;
+	padding-top: 2%;
+	text-align: center;
+}
+
+#authText{
+	font-family: 'Spartan';
+	font-size: 14px;
+	text-align: left;
+	padding-left: 10%;
+}
+
+body{
+	background-color: rgba(93,188,210);
+	background-repeat: no-repeat;
+	background-size: stretch;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	padding-bottom: 10px;
+	text-align: left-side;
+}
+
+#createEmail{
+	margin-right: 15%;
+}
+
+#createFirst{
+	margin-right: 15%;
+}
+
+#createLast{
+	margin-right: 15%;
+}
+
+#createPassword{
+	margin-right: 15%;
+}
+
+#entryData{
+  background-color: white;
+  border-radius: 10px;
+  width: 575px;
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+.form{
+  padding-top: 30px;
+}
+
+#formTabs{
+  text-align: center;
+  
+}
+
+li{
+	float: left;
+}
+
+li a {
+  
+  display: block;
+  color: white;
+  font-family: 'Spartan';
+  font-size: 14px;
+  text-align: center;
+  padding: 16px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: rgba(255, 255, 255, .95);
+  color: black;
+  border-radius: 10px;
+}
+
+#link9 {
+  float: right;
+  border-radius: 10px;
+}
+
+#pageTitle{
+	background-color: rgb(241, 241, 242);
+	border-radius: 10px;
+	color: black;
+    font-family: 'Spartan';
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 700;
+	opacity: .8;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	text-align: center;
+	width: 575px;
+}
+
+.tab {
+  overflow: hidden;
+  width: 575px;
+}
+
+.tab button {
+  background-color: rgb(241, 241, 242);
+  border-radius: 10px;
+  float: center;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  padding-left: 20%;
+  padding-right: 20%;
+  transition: 0.3s;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+
+.tab button:hover {
+  background-color: grey;
+  color: white;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  width: 575px;
+}
+
+#titleSpace{
+	padding-bottom: 4%;
+	padding-top: 4%;
+	padding-left: 35%;
+	padding-right: 35%;
+}
+
+#toBeHidden{
+  display: none;	
+}
+
+#topNavBar{
+	border-radius: 10px;
+	background: rgba(30, 26, 26, .98);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+	width: 100%;
+}
+
+#manager{
+	background-color: rgb(241, 241, 242);
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	font-family: 'Spartan';
+	font-size: 12px;
+	padding-bottom: 3%;
+	padding-top: 2%;
+	text-align: center;
+}
+
+#submitButton{
+	border-radius: 10px;
+	background-color: rgb(30, 26, 26);
+	color: white;
+	display: inline-block;
+	font-family: 'Spartan';
+	font-size: 14px;
+	padding: 15px 40px;
+	text-align: center;
+}
+
+#submitButton:hover{
+  background-color: rgba(30, 26, 26, 0.9);
+}
