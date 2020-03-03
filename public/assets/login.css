@@ -1,0 +1,138 @@
+#authEmail{
+	margin-right: 30%;
+}
+
+#authText{
+	font-family: 'Spartan';
+	font-size: 14px;
+	text-align: left;
+}
+
+#barAndLoginSpace{
+	padding-top: 8%;
+}
+
+/*  picture from: https://pixabay.com/illustrations/award-business-winner-recognition-3741918/   */
+body{
+	background: url('../public/assets/award.jpg');
+	background-repeat: no-repeat;
+	background-size: stretch;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	padding-bottom: 10px;
+	text-align: left-side;
+}
+
+#createPassword{
+	margin-right: 30%;
+}
+
+#enterYourInfo{
+    font-family: 'Spartan';
+	font-size: 14px;
+	padding-bottom: 15px;
+	padding-top: 10px;
+	text-decoration: underline;
+}
+
+#forgotPassword{
+    padding-top: 10px;	
+}
+
+#insidePage{
+	background-color: rgba(30, 26, 26, .98);
+	border-radius: 25px;
+	margin-left: 34%;
+	margin-right: 34%;
+	padding-bottom: 4%;
+	padding-top: 3%;
+	text-align: center;
+	width: 600px;
+}
+
+li{
+	float: left;
+}
+
+li a {
+  background-color: rgba(30, 26, 26, 0);
+  display: block;
+  color: white;
+  font-family: 'Spartan';
+  text-align: center;
+  padding: 16px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: rgba(255, 255, 255, .95);
+  color: black;
+  border-radius: 10px;
+}
+
+#link8{
+  float: right;	
+}
+
+#pageTitle{
+	color: white;
+    font-family: 'Spartan';
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 700;
+	opacity: .8;
+	text-align: center;
+}
+
+#slogan{
+	color: white;
+    font-family: 'Spartan';
+	font-size: 16px;
+	opacity: .9;
+	padding-bottom: 4%;
+	padding-top: 1%;
+	text-align: center;
+}
+
+#submitButton{
+	border-radius: 10px;
+	background-color: rgb(30, 26, 26);
+	color: white;
+	display: inline-block;
+	font-family: 'Spartan';
+	font-size: 14px;
+	padding: 15px 40px;
+	text-align: center;
+}
+
+#submitButton:hover{
+  background-color: rgba(30, 26, 26, 0.9);
+}
+
+#topNavBar{
+	background: rgba(30, 26, 26, .98);
+	border-radius: 10px;
+	color: white;
+    list-style-type: none;
+    margin: 0;
+	overflow: hidden;
+    padding: 0;
+	width: 100%;
+}
+
+#UserInfo{
+	background-color: rgb(241, 241, 242);
+	border-radius: 25px;
+	font-family: 'Spartan';
+	font-size: 12px;
+	margin-left: 25%;
+	margin-right: 25%;
+	padding-bottom: 3%;
+	padding-top: .1%;
+	text-align: center;
+}
+
+
