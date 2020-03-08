@@ -543,8 +543,10 @@
             request(userRequest, function (error, response, body){
                 // console.log(body)
                 // console.log(body)
-                if(body.trim() === "sql: no rows in result set")
+                // console.log("|", body, "|", "|", "test", typeof(body))
+                if(body.trim() === "sql: no rows in result set" || body.trim() == "null")
                 {
+                    // console.log("trigger")
                     parsedData = [];
                 }
                 else
@@ -553,6 +555,7 @@
                 }
                 if(parsedData.length === undefined) //less than 2 awards, so get obj instead of array
                 {
+                    // console.log("trigger2")
                 var tempArray = []
                     tempArray.push(parsedData);
                     parsedData = tempArray;
@@ -560,12 +563,16 @@
                 // console.log(typeof(parsedData));
                 var tempData = []
                 // console.log(parsedData)
-                for(var j=0; j<parsedData.length; j++)
-                {
-                    if(parsedData[j].createdby.userid == req.user.id)
-                    tempData.push(parsedData[j]);
-                }
                 // console.log(parsedData);
+                // console.log(body)
+                if(body != "null"){
+                    for(var j=0; j<parsedData.length; j++)
+                    {
+                        if(parsedData[j].createdby.userid == req.user.id)
+                        tempData.push(parsedData[j]);
+                    }
+                }
+                    // console.log(parsedData);
                 res.render("manager.ejs",{awardData: tempData, pagetitle: "Manager"});
             });
         });
