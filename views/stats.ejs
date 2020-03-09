@@ -4,62 +4,65 @@
 <html lang="en">
 
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
   <%- include('partials/head') %>
-  <link rel="stylesheet" type="text/css" href="login.css" >
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-
+  <link rel="stylesheet" type="text/css" href="./assets/stats.css">
+  
+  <%- include('partials/navbar') %>
+  <script>  
+    document.getElementById("link2").classList.add("active") 
+    document.getElementById("link1").remove()
+    document.getElementById("link3").remove()
+	document.getElementById("link8").remove()
+  </script>
 </head>
 
 <body>
-  <%- include('partials/navbar') %>
-  <script>  document.getElementById("link7").classList.add("active") 
-            document.getElementById("link1").remove()
-            document.getElementById("link3").remove()
-            document.getElementById("link4").remove()
-</script>
-  <div class="page-heading">
-    <h3 class="text-center ">Awards Statistics</h3>
+  <div id='titleSpace'>
+    <div id='pageTitle'>Statistics</div>
   </div>
+  
   <div id=userNumber hidden><%=userNum%></div>
-<div class="row">
-  <div class="card col-lg-6">
-    <h6 class="card-header">Your Awards Given Per Day(Last 10 Days)</h6>
-    <div class="card-body">
-      <div id="chart_1"></div>
-    </div>
-  </div>
-  <div class="card col-lg-6">
-    <h6 class="card-header">Total Awards Given Per Day-Sitewide (Last 10 Days)</h6>
-    <div class="card-body">
-      <div class="card-body">
-        <div id="chart_2"></div>
+  <div class="row">
+    <div class="card col-lg-6">
+      <h6 class="card-header">Your Awards Given Per Day (Last 10 Days)</h6>
+      <div id="chartSpace" class="card-body">
+        <div id="chart_1"></div>
       </div>
     </div>
-  </div>
-</div> 
-<div class="row">
-  <div class="card col-lg-6">
-    <h6 class="card-header">Total Awards Given By Region</h6>
-    <div class="card-body">
+	<div id="colSpace"></div>
+    <div class="card col-lg-6">
+      <h6 class="card-header">Total Awards Given Per Day-Sitewide (Last 10 Days)</h6>
       <div class="card-body">
-        <div id="chart_3"></div>
+        <div class="card-body">
+          <div id="chart_2"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card col-lg-6">
-    <h6 class="card-header">Most Awarded Employees</h6>
-    <div class="card-body">
+  </div> 
+  <div id="rowSpace">
+  <div class="row">
+    <div class="card col-lg-6">
+      <h6 class="card-header">Total Awards Given By Region</h6>
       <div class="card-body">
-        <div id="chart_4"></div>
+        <div class="card-body">
+          <div id="chart_3"></div>
+        </div>
       </div>
     </div>
-  </div>
-</div> 
+	<div id="colSpace"></div>
+    <div class="card col-lg-6">
+      <h6 class="card-header">Most Awarded Employees</h6>
+      <div class="card-body">
+        <div class="card-body">
+          <div id="chart_4"></div>
+        </div>
+      </div>
+    </div>
+  </div> 
   <%- include('partials/footer') %>
   <%- include('partials/footscripts') %>
-
-
 
 <script> 
 

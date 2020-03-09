@@ -3,48 +3,35 @@
 <html lang="en">
 
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
   <%- include('partials/head') %>
-  <link rel="stylesheet" type="text/css" href="login.css" >
+  <link rel="stylesheet" type="text/css" href="./assets/account.css">
+  <%- include('partials/navbar') %>
+  <script>  document.getElementById("link2").classList.add("active") 
+            document.getElementById("link1").remove()
+            document.getElementById("link3").remove()
+			document.getElementById("link8").remove()
+			
+  </script>
 </head>
 
 <body>
-<%- include('partials/navbar') %>
-<script>  
-          var entry =   <%- type %>;
-          console.log(entry);
-          document.getElementById("link9").classList.add("active") 
-          if(entry === "manager"){
-          document.getElementById("link1").remove()
-          }
-          else{  
-          document.getElementById("link2").remove()
-          }
-          document.getElementById("link3").remove()
-          document.getElementById("link4").remove()
-          document.getElementById("link6").remove()
-          document.getElementById("link7").remove()
-          document.getElementById("link8").remove()
-          document.getElementById("link9").remove()        
 
-</script>
-
-<div class="row">
-  <div class="card col-sm-4 mx-auto">
-    <h5 class="card-header text-center">Reset Password</h5>
-      <div class="card-body">
-        <form action="/accountpass" method="post">
-          <input type="password" name="newpass" placeholder="New Password">
-          <input class="btn btn-primary" type="submit" value="Update Password">
-        </form>
-      </div>
+  <div id='titleSpace'>
+    <div id='pageTitle'>Update Password</div>
   </div>
-</div>
+  
+  <div id='accountInfo'>
+    <form action="/accountpass" method="post">
+      <div class='container'>
+        <label for="typ"> Enter New Password: </label>
+        <input type="password" name="newpass" placeholder="New Password">
+      </div>
+  	<br>
+  	<button id='submitButton' type="Submit" value="Update Password">Create Award</button> 
+    </form>
+  </div>
 
-
-
-
-<%- include('partials/footer') %>
-<%- include('partials/footscripts') %>
 </body>
 </html>
 

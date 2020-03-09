@@ -3,55 +3,53 @@
 <html lang="en">
 
 <head>
-    <%- include('partials/head') %>
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
+  <%- include('partials/head') %>
+  <link rel="stylesheet" type="text/css" href="./assets/createAward.css">
+  
+  <%- include('partials/navbar') %>
+  <script>  document.getElementById("link2").classList.add("active") 
+            document.getElementById("link1").remove()
+            document.getElementById("link3").remove()
+			document.getElementById("link8").remove()
+  </script>
 </head>
 
 <body>
-<%- include('partials/navbar') %>
-<script>  document.getElementById("link6").classList.add("active") 
-          document.getElementById("link1").remove()  
-          document.getElementById("link3").remove() 
-          document.getElementById("link4").remove()
 
-</script>
-<div class="page-heading">
-    <h3 class="text-center">New Account Creation</h3>
-</div>
-
-<div class="row">
-    <div class="card mx-auto col-4">
-        <form action="/awards" method="POST">
-            <!-- <li>
-              <label for="reg"> Region: </label>
-              <input type="number" id="reg" name="region" placeholder="Region" >
-            </li> -->
-
-            <label for="selectRegion">Select Region:</label>
-            <select class="custom-select" id="selectRegion" name="region" required>
-            <option selected disabled>Choose Region...</option>
-                <%        regions.forEach(function(ele, i){       %>
-            <option value="<%= ele.regionid %>">
-                <%=     ele.regionname                           %> 
-                <%        })       %>
-                </option>
-            </select>
-
-            <li>
-              <label for="typ"> Award: </label>
-              <input type="text" id="typ" name="type" placeholder="Award Type" >
-            </li>
-            <li>
-              <label for="name"> Recipient Name: </label>
-              <input type="text" id="name" name="recipientname" placeholder="Full Name" >
-            </li>
-            <li>
-              <label for="email1"> Recipient Email: </label>
-              <input type="email" id="email1" name="recipientemail" placeholder="Recipient Email" >
-            </li>
-            <button class="btn btn-primary">Create Award</button>
-          </form>
-    </div>
-</div>
+  <div id='titleSpace'>
+    <div id='pageTitle'>Create an Award</div>
+  </div>
+  
+  <div id='awardInfo'>
+    <form action="/awards" method="POST">
+	  <div class='container'>
+	    <label for="selectRegion">Select Region:</label>
+		<select class="custom-select" id="selectRegion" name="region" required>
+		  <option selected disabled>Choose Region...</option>
+		    <%        regions.forEach(function(ele, i){       %>
+		  <option value="<%= ele.regionid %>">
+		    <%=     ele.regionname                           %> 
+            <%        })       %>
+		  </option>
+		</select>
+	  </div>
+	  <div class='container'>
+	    <label for="typ"> Award: </label>
+        <input type="text" id="typ" name="type" placeholder="Award Type" >
+	  </div>
+	  <div class='container'>
+	    <label for="name"> Recipient Name: </label>
+        <input type="text" id="name" name="recipientname" placeholder="Full Name" >
+	  </div>
+	  <div class='container'>
+	    <label for="email1"> Recipient Email: </label>
+        <input type="email" id="email1" name="recipientemail" placeholder="Recipient Email" >
+	  </div>
+	  <br>
+	  <button id='submitButton' type="Submit" value="admin">Create Award</button> 
+	</form>
+  </div>
 
   <%- include('partials/footer') %>
   <%- include('partials/footscripts') %>
