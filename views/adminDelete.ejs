@@ -3,38 +3,42 @@
 
 <head>
   <%- include('partials/head') %>
-
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="./assets/manager.css">
+  <%- include('partials/navbar') %>
+  <script>  document.getElementById("link2").classList.add("active") 
+            document.getElementById("link1").remove()
+            document.getElementById("link3").remove()
+			document.getElementById("link8").remove()
+  </script>
 </head>
-<%- include('partials/navbar') %>
 
-<script>  document.getElementById("link1").classList.add("active") 
-          document.getElementById("link2").remove()
-          document.getElementById("link4").remove()
-          document.getElementById("link6").remove()
-          document.getElementById("link7").remove()
-          document.getElementById("link8").remove()
-
-</script>
 
 
 <body>
-
-     <table class="table table-striped table-dark">
-      <thead>
-        <tr>    
-          <th> <h3>Delete The Following Account? </h3> </th>
-        </tr>
-        <tr>
-          <th>Admin ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Creation Date</th>
-          <th>Created By</th>
-          <th>Account Type</th>
-
-        </tr>
-      </thead>
+  <div id='insidePage'>
+  
+    <div id='titleSpace'>
+      <div id='pageTitle'>Delete User</div>
+	</div>
+	
+	<div id='tables'>
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>    
+            <th> <h3>Delete The Following Account? </h3> </th>
+          </tr>
+          <tr>
+            <th>Admin ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Creation Date</th>
+            <th>Created By</th>
+            <th>Account Type</th>
+	    
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <td> <%= adminData.userid %> </td> 
@@ -45,16 +49,16 @@
             <td> <%= adminData.createdby %> </td>
           </tr>  
         </tbody>
-        
-    </table>
+      </table>
+	</div>
+	
 
       <li>
         <h4>Are you sure you want to delete this user?</h4>
       </li>  
       <a href="/admin/deletead/bye/<%= adminData.userid %>"><button type="button" class="btn btn-danger">Delete Account</button></a>
       <a href="/admin"><button type="button" class="btn btn-secondary">Cancel</button></a>
-
-     
+  </div>  
 <hr>
 
   <%- include('partials/footer') %>
