@@ -858,8 +858,13 @@
 
 
     //UPDATE PASSWORD
-    app.get("/account", checkAuthenticated, function(req, res){  
-        res.render("account.ejs", {pagetitle: "Update Account", type: JSON.stringify(req.user.type)});
+    app.get("/account", checkAuthenticated, requireRole("manager"), function(req, res){  
+        userRequest = "https://kudosapi.wl.r.appspot.com/users/managers/" + req.user.id;
+        request(userRequest, function (error, response, managerbody){
+            managerParsed = JSON.parse(managerbody)
+            console.log(managerParsed)
+            res.render("account.ejs", {pagetitle: "Update Account", type: JSON.stringify(req.user.type), man : managerParsed});
+        });    
     });
 
     app.post("/accountpass", checkAuthenticated, async function(req, res){
@@ -875,9 +880,17 @@
                         // console.log(req.user.type)    
                     if(req.user.type === "manager")
                     {
-                        
-                        updateParams.firstname = bodyParsed.firstname;
-                        updateParams.lastname = bodyParsed.lastname;
+                        if(req.body.fn === ""){
+                            updateParams.firstname = bodyParsed.firstname;
+                        }else{
+                            updateParams.firstname = req.body.newfn;
+                        }
+                        if(req.body.ln === ""){
+                            updateParams.lastname = bodyParsed.lastname;
+                        }else{
+                            updateParams.lastname = req.body.newln;
+
+                        }    
                     }
                     // console.log(updateParams)
                     bodyString = JSON.stringify(updateParams);
