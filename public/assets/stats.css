@@ -1,5 +1,6 @@
 body{
   background-color: rgba(93,188,210);
+  background-image: none;
   background-repeat: no-repeat;
   background-size: stretch;
   width: 100%;
@@ -55,11 +56,7 @@ li a:hover {
   width: 575px;
 }
 
-.row{
-  margin-left: 5%;
-  margin-right: 5%;
-  width: 90%;
-}
+
 
 #titleSpace{
 	padding-bottom: 3%;

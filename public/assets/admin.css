@@ -1,7 +1,7 @@
 body{
+	background-image: none;
 	background-color: rgba(93,188,210);
 	background-repeat: no-repeat;
-	background-size: stretch;
 }
 
 #pageTitle{

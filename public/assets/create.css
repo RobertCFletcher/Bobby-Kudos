@@ -18,6 +18,7 @@
 
 body{
 	background-color: rgba(93,188,210);
+	background-image: none;
 	background-repeat: no-repeat;
 	background-size: stretch;
 }
