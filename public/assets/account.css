@@ -1,6 +1,5 @@
 #accountInfo{
   background-color: rgba(255, 255, 255, .95);
-  background-image: none;
   border-radius: 10px;
   font-family: 'Spartan';
   font-size: 14px;
@@ -13,6 +12,7 @@
 
 body{
 	background-color: rgba(93,188,210);
+	background-image: none;
 	background-repeat: no-repeat;
 	background-size: stretch;
 	width: 100%;

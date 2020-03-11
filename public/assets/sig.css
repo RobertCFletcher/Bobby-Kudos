@@ -1,7 +1,6 @@
 #acceptSig{
 	border-radius: 10px;
 	background-color: rgb(30, 26, 26);
-	background-image: none;
 	color: white;
 	display: inline-block;
 	font-family: 'Spartan';
@@ -16,6 +15,7 @@
 
 body{
 	background-color: rgba(93,188,210);
+	background-image: none;
 	background-repeat: no-repeat;
 	background-size: stretch;
 	width: 100%;
