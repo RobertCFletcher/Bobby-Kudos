@@ -39,30 +39,29 @@
         <ul>Lastname: <%= man.lastname %> </ul>
         <ul>Email: <%= man.email %> </ul>
 
-
+          <h4>Update User Info</h4>
         <form action="/accountpass" method="post" >
-          <h4>Update User Info</h6>
-          <li>       
-          <label for="fn">Update First Name</label>
-          <input type="text" id="fn" name="newfn" placeholder="<%= man.firstname %>">
-          </li>
-          <li>
-          <label for="ln">Update Last Name</label>
-          <input type="text" id="ln" name="newln" placeholder="<%= man.lastname %>">
-          </li>
-          <h6 class="text-danger"><%= msg %></h6>
-          <li>
-          <label for="cpass">Current Password</label>
-          <input type="password" id="cpass" name="currentpass" placeholder="Current Password" required>
-          </li>
-          <li>
-          <label for="pass">New Password</label>
-          <input type="password" id="pass" name="newpass" placeholder="New Password" required>
-          </li>
+          <div class="form-group row">
 
-          <input class="btn btn-primary" type="submit" value="Update Account">
+  
+          <label class="col-sm-5 col-form-label" for="fn">Update First Name</label>
+          <input class="col-sm-7 form-control-sm" type="text" id="fn" name="newfn" placeholder="<%= man.firstname %>">
 
+          <label class="col-sm-5 col-form-label" for="ln">Update Last Name</label>
+          <input class="col-sm-7 form-control-sm" type="text" id="ln" name="newln" placeholder="<%= man.lastname %>">
+
+
+
+          <label class="col-sm-5 col-form-label" for="cpass">Current Password</label>
+          <input class="col-sm-7 form-control-sm" type="password" id="cpass" name="currentpass" placeholder="Current Password" required>
+
+          <label class="col-sm-5 col-form-label" for="pass">New Password</label>
+          <input class="col-sm-7 form-control-sm" type="password" id="pass" name="newpass" placeholder="New Password" required>
+
+          <input class="btn btn-primary mx-auto" type="submit" value="Update Account">
+        </div>
         </form>
+        <h6 class="text-danger"><%= msg %></h6>
       </div>
   </div>
 </div>

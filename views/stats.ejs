@@ -32,37 +32,37 @@
       <!-- <div id="chart_1"></div> -->
     <!-- </div> -->
 <form class="card-body" action="/queryAwards" method="post">
-  <ul class="mx-auto text-center">
-    <li>
-        <label for="sd">Start Date: </label>
-        <input type="date" id="sd" name="startdate">
-    </li>
+  <div class=" form-group row">
 
-    <li>
-        <label for="ed">End Date: </label>
-        <input type="date" id="ed" name="enddate" >
-    </li>
+        <label class="col-sm-4 col-form-label" for="sd">Start Date: </label>
+        <input class="col-sm-8 form-control-sm" type="date" id="sd" name="startdate">
 
-    <li>
-        <label for="at">Award Type: </label>
-        <input type="text" id="at" name="awardtype" placeholder="Full or Partial Award Name" >
-    </li>
 
-    <li>
-        <label for="rn">Region Name</label>
-        <input type="text" id="rn" name="regionname" placeholder="Full of Partial Region Name" >
-    </li>
-    <li>
-      <label for="rname">Recipient Name</label>
-      <input type="text" id="rname" name="recipientname" placeholder="Full of Partial Region Name" >
-    </li>
-    <li>
-      <label for="remail">Recipient Email</label>
-      <input type="text" id="remail" name="recipientemail" placeholder="Full of Partial Recipient Email" >
-    </li>
-      <input type="submit" class="btn btn-primary" value="Find Awards">
 
-</ul>
+        <label class="col-sm-4 col-form-label" for="ed">End Date: </label>
+        <input class="col-sm-8 form-control-sm" type="date" id="ed" name="enddate" >
+
+
+
+        <label class="col-sm-4 col-form-label" for="at">Award Type: </label>
+        <input class="col-sm-8 form-control-sm" type="text" id="at" name="awardtype" placeholder="Full or Partial Award Name" >
+
+
+
+        <label class="col-sm-4 col-form-label" for="rn">Region Name</label>
+        <input class="col-sm-8 form-control-sm" type="text" id="rn" name="regionname" placeholder="Full of Partial Region Name" >
+
+
+      <label class="col-sm-4 col-form-label" for="rname">Recipient Name</label>
+      <input class="col-sm-8 form-control-sm" type="text" id="rname" name="recipientname" placeholder="Full of Partial Recipient Name" >
+
+
+      <label class="col-sm-4 col-form-label" for="remail">Recipient Email</label>
+      <input class="col-sm-8 form-control-sm" type="text" id="remail" name="recipientemail" placeholder="Full of Partial Recipient Email" >
+
+      <input type="submit" class="btn btn-primary mx-auto" value="Find Awards">
+  </div>
+
 
 
 </form>

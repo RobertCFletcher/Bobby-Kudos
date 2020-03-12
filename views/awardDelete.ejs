@@ -5,25 +5,28 @@
   <%- include('partials/head') %>
 
 </head>
-<%- include('partials/navbar') %>
-
-<script>   
-          document.getElementById("link1").remove()
-          document.getElementById("link4").remove()
-          // document.getElementById("link7").remove()
-          document.getElementById("link3").remove()
-
-</script>
 
 
-<body>
 
+<body class="bg-dark" >
 
-        <h4>Are you sure you want to delete Award <%=AwardNum %>?</h4>
+  <%- include('partials/navbar') %>
 
-      <a href="/manager/deleteaward/bye/<%=AwardNum%>"><button type="button" class="btn btn-danger">Delete Award</button></a>
+  <script>   
+            document.getElementById("link1").remove()
+            document.getElementById("link4").remove()
+            // document.getElementById("link7").remove()
+            document.getElementById("link3").remove()
+  
+  </script>
+
+<div class="row">
+      <div class="card col-md-4 mx-auto text-center bg-warning">
+                <h4 class="card-header text-center bg-dark text-light">Are you sure you want to delete Award <%=AwardNum %>?</h4>
+      <a href="/manager/deleteaward/bye/<%=AwardNum%>"><button type="button" class="btn btn-danger text-center">Delete Award</button></a>
       <a href="/manager"><button type="button" class="btn btn-secondary">Cancel</button></a>
-
+      </div>
+</div>
      
 
 

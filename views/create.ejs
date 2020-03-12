@@ -4,6 +4,7 @@
 
 <head>
     <%- include('partials/head') %>
+    <link rel="stylesheet" type="text/css" href="login.css" >
 </head>
 
 <body>
@@ -22,34 +23,33 @@
 <div class="row">
     <div class="card mx-auto col-4">
   <form action="/create" method="post" >
-      <ul>
-          <li>
-              <label for="createFirst">First Name: </label>
-              <input type="text" id="createFirst" name="userFirst" placeholder="First Name" >
-          </li>
+      <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="createFirst">First Name: </label>
+              <input class="col-sm-8 form-control-sm" type="text" id="createFirst" name="userFirst" placeholder="First Name" >
+        
 
-          <li>
-              <label for="createLast">Last Name: </label>
-              <input type="text" id="createLast" name="userLast" placeholder="Last Name" >
-          </li>
+        
+              <label class="col-sm-4 col-form-label" for="createLast">Last Name: </label>
+              <input class="col-sm-8 form-control-sm" type="text" id="createLast" name="userLast" placeholder="Last Name" >
+        
 
-          <li>
-              <label for="createEmail">Email: </label>
-              <input type="email" id="createEmail" name="userEmail" placeholder="Enter Email Here" >
-          </li>
+        
+              <label class="col-sm-4 col-form-label" for="createEmail">Email: </label>
+              <input class="col-sm-8 form-control-sm" type="email" id="createEmail" name="userEmail" placeholder="Enter Email Here" >
+        
 
-          <li>
-              <label for="createPassword">Password</label>
-              <input type="password" id="createPassword" name="userPass" placeholder="Enter Password" >
-          </li>
+        
+              <label class="col-sm-4 col-form-label" for="createPassword">Password</label>
+              <input class="col-sm-8 form-control-sm" type="password" id="createPassword" name="userPass" placeholder="Enter Password" >
+        
 
-          <li>
-              <input type="radio" id="adminRadio" name="accountType" value="admin">
-              <label for="adminRadio">Admin Account</label>
-              <input type="radio" id="mangRadio" name="accountType" value="manager" checked="checked">
-              <label for="mangRadio">Manager Account</label>
-          </li>
-      </ul>
+        
+              <input class="col-sm-2 form-control" type="radio" id="adminRadio" name="accountType" value="admin">
+              <label class="col-sm-10 col-form-label" for="adminRadio">Admin Account</label>
+              <input class="col-sm-2 form-control" type="radio" id="mangRadio" name="accountType" value="manager" checked="checked">
+              <label class="col-sm-10 col-form-label" for="mangRadio">Manager Account</label>
+        
+      </div>
     <button class="btn btn-primary">Create Account</button> 
   </form>
     </div>

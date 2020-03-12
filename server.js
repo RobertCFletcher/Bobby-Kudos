@@ -865,7 +865,7 @@
                                 userRequest = "https://kudosapi.wl.r.appspot.com/users/managers/" + req.user.id;
                                 request(userRequest, function (error, response, managerbody){
                                     managerParsed = JSON.parse(managerbody)
-                                    res.render("account.ejs", {pagetitle: "Update Account", type: JSON.stringify(req.user.type), man : managerParsed, msg: "PASSWORD FAILED TO MATCH"});
+                                    res.render("account.ejs", {pagetitle: "Update Account", type: JSON.stringify(req.user.type), man : managerParsed, msg: "CURRENT PASSWORD INCORRECT"});
                                 });    
                             }
     
