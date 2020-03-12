@@ -50,8 +50,7 @@ body{
   background-color: white;
   border-radius: 10px;
   width: 575px;
-  margin-left: 35%;
-  margin-right: 35%;
+  margin: 0 auto;
 }
 
 .form{
@@ -60,7 +59,7 @@ body{
 
 #formTabs{
   text-align: center;
-  
+  margin: 0 auto;
 }
 
 li{
@@ -97,6 +96,7 @@ li a:hover {
 	font-size: 26px;
 	font-style: normal;
 	font-weight: 700;
+	margin: 0 auto;
 	opacity: .8;
 	padding-bottom: 20px;
 	padding-top: 20px;
@@ -135,14 +135,14 @@ li a:hover {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+  margin: 0 auto;
   width: 575px;
 }
 
 #titleSpace{
+	margin: 0 auto;
 	padding-bottom: 4%;
 	padding-top: 4%;
-	padding-left: 35%;
-	padding-right: 35%;
 }
 
 #toBeHidden{
