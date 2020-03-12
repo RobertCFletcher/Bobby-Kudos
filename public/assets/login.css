@@ -45,12 +45,11 @@ body{
 #insidePage{
 	background-color: rgba(30, 26, 26, .98);
 	border-radius: 25px;
-	margin-left: 34%;
-	margin-right: 34%;
 	padding-bottom: 4%;
 	padding-top: 3%;
 	text-align: center;
 	width: 600px;
+	margin: 0 auto;
 }
 
 li{
