@@ -62,7 +62,10 @@ body{
 }
 
 #signatureparent{
+	border-radius: 10px;
+	margin: 0 auto;
 	text-align: center;
+	width: 80%;
 }
 
 #titleSpace{
