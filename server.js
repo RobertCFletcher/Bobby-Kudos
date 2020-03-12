@@ -634,7 +634,7 @@
     });
 
     //AWARD STATS
-    app.get("/stats", checkAuthenticated, requireRole("manager"), function(req, res){
+    app.get("/stats", checkAuthenticated, requireRole("admin"), function(req, res){
         //Chart1 = Local awards given
         //Chart2= Total awards given
         //Chart3= Awards by region
@@ -793,9 +793,32 @@
 
             res.render("stats.ejs", {pagetitle: "Award Statistics", userNum: req.user.id, chart1data: chart1data, chart2data: chart2data, chart3data: chart3data, chart4data: chart4data});
         });
-
-
     });
+
+    //Query Search
+    app.post("/queryAwards", checkAuthenticated, requireRole("admin"), function(req, res){
+            // Create search query string from form params
+            var query = req.body
+            var urlstring = "https://kudosapi.wl.r.appspot.com/awards/search?"
+            var paramAdded = 0;
+            for(var key in query)
+            {
+                if(query[key] != ""){
+                    if(paramAdded === 1)
+                    {urlstring = urlstring + "&"}
+                    urlstring = urlstring + key + "=" + query[key];
+                    paramAdded = 1;
+                }
+            }
+            console.log(urlstring)
+            //Send API search request
+            request(urlstring, function (error, response, body){
+                var searchResults = JSON.parse(body);
+                if(body.trim()=="null"){searchResults = []};
+                res.render("awardResults.ejs", {pagetitle: "Award Results", awardData: searchResults})
+            });    
+    });
+
 
     //UPDATE SIGNATURE
     app.get("/sig", checkAuthenticated, requireRole("manager"), function(req, res){

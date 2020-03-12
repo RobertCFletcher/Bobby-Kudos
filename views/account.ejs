@@ -34,19 +34,29 @@
   <div class="card col-sm-4 mx-auto">
     <h5 class="card-header text-center">Update Account</h5>
       <div class="card-body">
+        <h4>Current User Info</h6>
         <ul>Firstname: <%= man.firstname %> </ul>
         <ul>Lastname: <%= man.lastname %> </ul>
         <ul>Email: <%= man.email %> </ul>
 
 
-        <form action="/accountpass" method="post" >       
+        <form action="/accountpass" method="post" >
+          <h4>Update User Info</h6>
+          <li>       
           <label for="fn">Update First Name</label>
           <input type="text" id="fn" name="newfn" placeholder="<%= man.firstname %>">
+          </li>
+          <li>
           <label for="ln">Update Last Name</label>
           <input type="text" id="ln" name="newln" placeholder="<%= man.lastname %>">
+          </li>
+          <li>
           <label for="pass">New Password</label>
           <input type="password" id="pass" name="newpass" placeholder="New Password" required>
+          </li>
+          <li>
           <input class="btn btn-primary" type="submit" value="Update Account">
+        </li>  
         </form>
       </div>
   </div>
