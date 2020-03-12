@@ -3,11 +3,11 @@
   border-radius: 10px;
   font-family: 'Spartan';
   font-size: 14px;
-  margin-left: 30%;
-  margin-right: 30%;
+  margin: 0 auto;
   padding-top: 2%;
   padding-bottom: 2%;
   text-align: center;
+  width: 600px;
 }
 
 body{
