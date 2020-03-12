@@ -21,10 +21,10 @@
           }
           document.getElementById("link3").remove()
           document.getElementById("link4").remove()
-          document.getElementById("link6").remove()
+          // document.getElementById("link6").remove()
           document.getElementById("link7").remove()
-          document.getElementById("link8").remove()
-          document.getElementById("link9").remove()        
+          // document.getElementById("link8").remove()
+          // document.getElementById("link9").remove()        
 
 </script>
 
@@ -50,13 +50,18 @@
           <label for="ln">Update Last Name</label>
           <input type="text" id="ln" name="newln" placeholder="<%= man.lastname %>">
           </li>
+          <h6 class="text-danger"><%= msg %></h6>
+          <li>
+          <label for="cpass">Current Password</label>
+          <input type="password" id="cpass" name="currentpass" placeholder="Current Password" required>
+          </li>
           <li>
           <label for="pass">New Password</label>
           <input type="password" id="pass" name="newpass" placeholder="New Password" required>
           </li>
-          <li>
+
           <input class="btn btn-primary" type="submit" value="Update Account">
-        </li>  
+
         </form>
       </div>
   </div>
