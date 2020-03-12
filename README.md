@@ -12,6 +12,7 @@ A live version of the web app is hosted on heroku.
 https://kudos-employee.herokuapp.com/
 
 Two account types are available to on the platform:
+
 ADMIN ACCOUNT
   An admin account is able to create, modify, and delete both admin and manager accounts.
   The admin is also able to monitor the use of the platform and the distribution of awards including a search function.
