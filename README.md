@@ -1,34 +1,33 @@
-Kudos
+Kudos Server
 
-manager accounts are able to be created on the create page. 
-manager accounts can be authenticated. Note passwords will only work if the bcrypt hash is what is stored in database.
-Any password that was directly entered into the database will not authenticate. 
-Plain text passwords entered directly into database will not work
+To run the server you can either navigate to the directory and run:
+  node server.js
+    or
+  npm run devstart 
+    (this begins the app using nodemon to auto restart after any dev changes)
+   
+The server will either start on a port definied by an environment variable or will default to a hardcoded port number
 
-Sample Manager login:
+A live version of the web app is hosted on heroku. 
+https://kudos-employee.herokuapp.com/
 
-man@serv
-
-1234
-
-This will allow access to the manager page
-
-Admin accounts can now also be created on the create page.
-When deployed, the create page will require admin authentication, but currently in dev it is open. 
-Like manager accounts, only admin accounts that contain a hashed password in the database will be authenticated.
-Plain text passwords entered directly into database will not work
-
-Sample Admin login:
-
-mon@admin.com
-
-1234
-
-
-
-Sart server with nodemon with "npm run devstart"
-Server is hardcoded to run on port 31112 unless env var PORT is definied. 
-
--4 pages to create modify admin, modify manager, delete admin, delete manager
--create account express flash
--create account - add created by to post request
+Two account types are available to on the platform:
+ADMIN ACCOUNT
+  An admin account is able to create, modify, and delete both admin and manager accounts.
+  The admin is also able to monitor the use of the platform and the distribution of awards including a search function.
+  
+  sample admin account:
+  admin@test.com
+  
+  password:
+  1234
+ 
+MANAGER ACCOUNT
+  Manager Accounts are able to create, view, and delete employee awards
+  Managers also are able to design a signature and update their account information. 
+  
+  sample manager account:
+  manager@test.com
+  
+  Password:
+  1234
