@@ -156,6 +156,7 @@
     app.use(passport.initialize());
     app.use(passport.session());    //link passport to express sessions for persistant login
     app.use(express.static("public")); //use public folder to hold assets
+    app.use('/public', express.static('public'));
 
     //COOKIE CHECK
     //==================================================================  
