@@ -3,13 +3,8 @@
 
 <head>
   <%- include('partials/head') %>
-
-</head>
-
-
-
-<body class="bg-dark" >
-
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="./assets/manager.css">
   <%- include('partials/navbar') %>
 
   <script>   
@@ -19,6 +14,9 @@
             document.getElementById("link3").remove()
   
   </script>
+</head>
+
+<body>
 
 <div class="row">
       <div class="card col-md-4 mx-auto text-center bg-warning">
@@ -27,10 +25,9 @@
       <a href="/manager"><button type="button" class="btn btn-secondary">Cancel</button></a>
       </div>
 </div>
-     
-
 
   <%- include('partials/footer') %>
   <%- include('partials/footscripts') %>
+  
 </body>
 </html>
