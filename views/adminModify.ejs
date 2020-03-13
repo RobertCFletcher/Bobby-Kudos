@@ -15,7 +15,6 @@
           // document.getElementById("link7").remove()
           document.getElementById("link8").remove()
           document.getElementById("link9").remove()
-
   </script>
   
 </head>
@@ -53,28 +52,29 @@
     </div>
     
     <div id='titleSpace'></div>
-
-    <form action="/admin/modifyad/edit/<%=adminData.userid%>" method="post" >
-      <!-- <li>
-        <label for="modfn">First Name: </label>
-        <input type="text" id="modfn" name="firstname" value="<%= adminData.firstname %>" >
-      </li>  
-      <li>
-        <label for="modln">Last Name: </label>
-        <input type="text" id="modln" name="lastname" value="<%= adminData.lastname %>" >
-      </li>   -->
-      <li>
-        <label for="modEmail">Email: </label>
-        <input type="email" id="modEmail" name="email" value="<%= adminData.email %>" >
-      </li>  
-      <!-- <li>
-        <label for="modCby">Created By: </label>
-        <input type="number" id="modCby" name="createdby" value="<%= adminData.createdby %>" >
-      </li>  -->
-
-      <input type="Submit" class="btn btn-primary" value="Update">
-      <a href="/admin"><button type="button" class="btn btn-secondary">Cancel</button></a>
-    </form>
+    
+    <div id="managerForm">
+      <form action="/admin/modifyad/edit/<%=adminData.userid%>" method="post" >
+        <div class='container'>
+          <label for="modfn">First Name: </label>
+          <input type="text" id="modfn" name="firstname" value="<%= adminData.firstname %>" >
+        </div> 
+        <div class='container'>
+          <label for="modln">Last Name: </label>
+          <input type="text" id="modln" name="lastname" value="<%= adminData.lastname %>" >
+        </div>
+        <div class='container'>
+          <label for="modEmail">Email: </label>
+          <input type="email" id="modEmail" name="email" value="<%= adminData.email %>" >
+        </div> 
+        <div class='container'>
+          <label for="modCby">Created By: </label>
+          <input type="number" id="modCby" name="createdby" value="<%= adminData.createdby %>" >
+        </div>
+        <input id="submitButton" type="Submit" value="Update">
+        <a href="/admin"><button id="cancelButton" type="button">Cancel</button></a>
+      </form>
+    </div>
      
 <hr>
 
