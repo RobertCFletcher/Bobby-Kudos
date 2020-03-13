@@ -3,11 +3,12 @@
 
 <head>
   <%- include('partials/head') %>
-
-</head>
-<%- include('partials/navbar') %>
-
-<script>  document.getElementById("link1").classList.add("active") 
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
+  <%- include('partials/head') %>
+  <link rel="stylesheet" type="text/css" href="../../assets/managerModify.css">
+  <%- include('partials/navbar') %>
+  
+  <script>  document.getElementById("link1").classList.add("active") 
           document.getElementById("link2").remove()
           document.getElementById("link4").remove()
           document.getElementById("link6").remove()
@@ -15,38 +16,43 @@
           document.getElementById("link8").remove()
           document.getElementById("link9").remove()
 
-</script>
-
+  </script>
+  
+</head>
 
 <body>
 
-     <table class="table table-striped table-dark">
-      <thead>
-        <tr>    
-          <th> <h3>Modify The Following Admin </h3> </th>
-        </tr>
-        <tr>
-          <th>Admin ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Creation Date</th>
-          <th>Created By</th>
-
-        </tr>
-      </thead>
-        <tbody>
+    <div id='titleSpace'></div>
+    
+    <div id='tables'>
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>    
+            <th> <h3>Modify The Following Admin </h3> </th>
+          </tr>
           <tr>
-            <td> <%= adminData.userid %> </td> 
-            <td> <%= adminData.firstname %> </td>
-            <td> <%= adminData.lastname %> </td>
-            <td> <%= adminData.email %> </td>
-            <td> <%= adminData.createdon.Time %> </td>
-            <td> <%= adminData.createdby %> </td>
-          </tr>  
-        </tbody>
-        
-    </table>
+            <th>Admin ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Creation Date</th>
+            <th>Created By</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <td> <%= adminData.userid %> </td> 
+              <td> <%= adminData.firstname %> </td>
+              <td> <%= adminData.lastname %> </td>
+              <td> <%= adminData.email %> </td>
+              <td> <%= adminData.createdon.Time %> </td>
+              <td> <%= adminData.createdby %> </td>
+            </tr>  
+          </tbody>
+      </table>
+    </div>
+    
+    <div id='titleSpace'></div>
 
     <form action="/admin/modifyad/edit/<%=adminData.userid%>" method="post" >
       <!-- <li>
