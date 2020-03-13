@@ -6,6 +6,19 @@ body{
 	width: 100%;
 }
 
+.container {
+	display: grid;
+	grid-template-columns: 1fr 2.75fr;
+	padding-bottom: 10px;
+	padding-left: 5%;
+	padding-right: 5%;
+	text-align: left;
+}
+
+.form{
+  padding-top: 30px;
+}
+
 #titleSpace{
 	padding-bottom: 3%;
 	padding-top: 3%;
