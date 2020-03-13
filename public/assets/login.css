@@ -39,7 +39,14 @@ body{
 }
 
 #forgotPassword{
-    padding-top: 10px;	
+    border-radius: 10px;
+    background-color: rgb(30, 26, 26);
+    color: white;
+    display: inline-block;
+    font-family: 'Spartan';
+    font-size: 14px;
+    padding: 15px 40px;
+    text-align: center;	
 }
 
 #insidePage{
