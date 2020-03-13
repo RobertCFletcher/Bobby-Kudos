@@ -4,51 +4,50 @@
 
 <head>
   <%- include('partials/head') %>
-  <link rel="stylesheet" type="text/css" href="login.css" >
+  
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="./assets/login.css">
 </head>
 
 <body>
 <%- include('partials/navbar') %>
-<script>  document.getElementById("link4").classList.add("active") 
-          document.getElementById("link4").remove()
+<script>  document.getElementById("link8").remove()
           document.getElementById("link1").remove()
-
           document.getElementById("link2").remove()
           document.getElementById("link3").remove()
           document.getElementById("link5").remove()
           document.getElementById("link6").remove()
           document.getElementById("link7").remove()
-          document.getElementById("link8").remove()
+          document.getElementById("link4").remove()
           document.getElementById("link9").remove()
 </script>
 
-<div class="page-heading">
-  <h3 class="text-center">Making employee recognition possible!</h3>
-</div>
+<div id='barAndLoginSpace'></div>
 
-
-
-  <div class="row">
-    <div class="card mx-auto col-4">
-      <h4 class="card-header">Please Login</h4>
-      <% if (messages.error) { %>
-        <%= messages.error %>
-        <% } %>
-      <form action="/login" method="post" >
-          <div class="form-group">
-          <label for="authEmail">Email: </label>
-          <input type="email" id="authEmail" name="userEmail" placeholder="Email" class="form-control" >
-          <label for="createPassword">Password</label>
-          <input type="password" id="createPassword" name="userPass" placeholder="**********" pattern=".{1,}" class="form-control" >
-          <input type="Submit" class="btn btn-primary" value="Login" class="form-control">
-           <a href="/forgot" class=""><button type="button" class="btn btn-secondary">Forgot Password</button></a>
-          </div>
-        </form>
-    </div> 
+<div id='insidePage'>
+  <div id='pageTitle'>
+	  Kudos Employee Recognition Portal
   </div>
+  <h5 id="slogan">Making employee recognition possible for the last week!</h5>
 
-<%- include('partials/footer') %>
-<%- include('partials/footscripts') %>
+  <div id="UserInfo">
+      <div id="enterYourInfo">Please Enter Your Info Below</div>
+      <form action="/login" method="post" >
+        <div class='container'>
+          <label for="authEmail" id='authText'>Email:</label>
+          <input type="email" id="authEmail" name="userEmail" placeholder="Email" >
+	    </div>
+	    <div class='container'>
+          <label for="createPassword" id='authText'>Password:</label>
+          <input type="password" id="createPassword" name="userPass" placeholder="********" >
+        </div>
+        <button id='submitButton' type="Submit" value="Log In">Log In</button>
+	    <div id="forgotPassword">
+            <a href="#forgotPassword">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+</div>
 </body>
 </html>
 
