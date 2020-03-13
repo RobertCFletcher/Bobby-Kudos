@@ -22,7 +22,9 @@ body{
 }
 
 #confirmation{
-	padding-bottom: 15px;
+	font-family: 'Spartan';
+	font-size: 14px;
+	padding-bottom: 20px;
 }
 
 #deleteButton{
