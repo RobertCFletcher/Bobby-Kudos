@@ -39,25 +39,17 @@ body{
 }
 
 #forgotPassword{
-    border-radius: 10px;
-    background-color: rgb(30, 26, 26);
-    color: white;
-    display: inline-block;
-    font-family: 'Spartan';
-    font-size: 14px;
-    padding: 15px 40px;
-    text-align: center;	
+    padding-top: 10px;	
 }
 
 #insidePage{
 	background-color: rgba(30, 26, 26, .98);
 	border-radius: 25px;
-	margin-left: 34%;
-	margin-right: 34%;
 	padding-bottom: 4%;
 	padding-top: 3%;
 	text-align: center;
 	width: 600px;
+	margin: 0 auto;
 }
 
 li{
