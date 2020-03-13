@@ -51,24 +51,25 @@
       </table>
 	</div>
 
-    <form action="/admin/modifymanager/edit/<%=managerData.userid%>" method="post" >
-      <li>
-        <label for="modfn">First Name: </label>
-        <input type="text" id="modfn" name="firstname" value="<%= managerData.firstname %>" >
-      </li>  
-      <li>
-        <label for="modln">Last Name: </label>
-        <input type="text" id="modln" name="lastname" value="<%= managerData.lastname %>" >
-      </li>  
-      <li>
-        <label for="modEmail">Email: </label>
-        <input type="email" id="modEmail" name="email" value="<%= managerData.email %>" >
-      </li>  
+    <div id="managerForm">
+      <form action="/admin/modifymanager/edit/<%=managerData.userid%>" method="post" >
+        <div class='container'>
+          <label for="modfn">First Name: </label>
+          <input type="text" id="modfn" name="firstname" value="<%= managerData.firstname %>" >
+        </div>
+        <div class='container'>
+          <label for="modln">Last Name: </label>
+          <input type="text" id="modln" name="lastname" value="<%= managerData.lastname %>" >
+        </div>  
+        <div class='container'>
+          <label for="modEmail">Email: </label>
+          <input type="email" id="modEmail" name="email" value="<%= managerData.email %>" >
+        </div> 
 
-
-      <input type="Submit" class="btn btn-primary" value="Update">
-      <a href="/admin"><button type="button" class="btn btn-secondary">Cancel</button></a>
-    </form>
+        <input id="submitButton" type="Submit" value="Update">
+        <a href="/admin"><button id="cancelButton" type="button">Cancel</button></a>
+      </form>
+    </div>
      
 <hr>
 
