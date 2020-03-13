@@ -156,7 +156,7 @@
     app.use(passport.initialize());
     app.use(passport.session());    //link passport to express sessions for persistant login
     app.use(express.static("public")); //use public folder to hold assets
-    app.use('/public', express.static("public"));
+	app.use('/public', express.static("public"));
 
     //COOKIE CHECK
     //==================================================================  
@@ -389,24 +389,31 @@
     });
 
     app.post("/admin/modifyad/edit/:modNum", checkAuthenticated, requireRole("admin"), function(req, res){
+        // get current email of user
         userRequest = "https://kudosapi.wl.r.appspot.com/users/admins/";
         request(userRequest + req.params.modNum, function (error, response, body){
             bodyParsed = JSON.parse(body);
             var updateParams = {
                 email: req.body.email,
-                password: bodyParsed.password
+                password: ""
                 };
-                if(updateParams.email === ""){updateParams.email = bodyParsed.email};  
-            bodyString = JSON.stringify(updateParams);
-            var options = { method: 'PUT',
-                url: 'https://kudosapi.wl.r.appspot.com/users/admins/'+req.params.modNum,
-                headers: { 'cache-control': 'no-cache' },
-                body:bodyString
-                };
-            request(options, function (error2, response2, body2) {
-                if (error2) throw new Error(error2);
-                res.redirect("/admin")
-
+                if(updateParams.email === ""){updateParams.email = bodyParsed.email};
+                // Get current user password hash  
+                userRequest = "https://kudosapi.wl.r.appspot.com/users/" + bodyParsed.email ;
+                request(userRequest, function (error2, response2, body2){
+                    bodyString = JSON.parse(body2);
+                    updateParams.password = bodyString.password
+                    updateParams = JSON.stringify(updateParams);
+                    //Send update request
+                    var options = { method: 'PUT',
+                    url: 'https://kudosapi.wl.r.appspot.com/users/admins/'+req.params.modNum,
+                    headers: { 'cache-control': 'no-cache' },
+                    body:updateParams
+                    };
+                    request(options, function (error2, response2, body2) {
+                        if (error2) throw new Error(error2);
+                        res.redirect("/admin")
+                    });    
             });
         });
     });
@@ -444,6 +451,7 @@
     });
 
     app.post("/admin/modifymanager/edit/:modNum", checkAuthenticated, requireRole("admin"), function(req, res){
+        //Get current email, firstname, lastname
         userRequest = "https://kudosapi.wl.r.appspot.com/users/managers/";
         request(userRequest + req.params.modNum, function (error, response, body){
             bodyParsed = JSON.parse(body);
@@ -452,23 +460,27 @@
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
                 email: req.body.email,
-                password: bodyParsed.password
+                password: ""
                 };
-
+            //Make sure no empty fields
             if(updateParams.firstname === ""){updateParams.firstname = bodyParsed.firstname};    
             if(updateParams.lastname === ""){updateParams.lastname = bodyParsed.lastname};    
             if(updateParams.email === ""){updateParams.email = bodyParsed.email};    
-
-            bodyString = JSON.stringify(updateParams);
-            var options = { method: 'PUT',
-                url: 'https://kudosapi.wl.r.appspot.com/users/managers/'+req.params.modNum,
-                headers: { 'cache-control': 'no-cache' },
-                body:bodyString
-                };
-            request(options, function (error2, response2, body2) {
-                if (error2) throw new Error(error2);
-                res.redirect("/admin")
-
+            //Get current user password hash
+            userRequest = "https://kudosapi.wl.r.appspot.com/users/" + bodyParsed.email ;
+            request(userRequest, function (error2, response2, body2){
+                bodyString = JSON.parse(body2);
+                updateParams.password = bodyString.password
+                bodyString = JSON.stringify(updateParams);
+                var options = { method: 'PUT',
+                    url: 'https://kudosapi.wl.r.appspot.com/users/managers/'+req.params.modNum,
+                    headers: { 'cache-control': 'no-cache' },
+                    body:bodyString
+                    };
+                request(options, function (error2, response2, body2) {
+                    if (error2) throw new Error(error2);
+                    res.redirect("/admin")
+                });    
             });
         });
     });
