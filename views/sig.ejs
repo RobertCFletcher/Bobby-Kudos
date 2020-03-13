@@ -4,8 +4,7 @@
 
 <head>
   <%- include('partials/head') %>
-  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" type="text/css" href="./assets/admin.css">
+  <link rel="stylesheet" type="text/css" href="login.css" >
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> 
   <script src="jSignature.js"></script>
   <script src="plugins/jSignature.CompressorBase30.js"></script>
@@ -21,10 +20,11 @@
           document.getElementById("link4").remove()
           document.getElementById("link3").remove()
           document.getElementById("link7").remove()
-
 </script>
 
-<h5 class="bg-info text-center">Draw your signature below to use on your Award PDFs</h5>
+<div id='titleSpace'>
+      <div id='pageTitle'>Draw your signature below to use on your Award PDFs</div>
+</div>
 
 <div class="bg-dark " id="signatureparent">
   <div>
