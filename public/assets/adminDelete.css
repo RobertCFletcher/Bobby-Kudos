@@ -31,6 +31,13 @@ body{
   background-color: rgba(30, 26, 26, 0.9);
 }
 
+#confirmation{
+	display: inline-block;
+	font-family: 'Spartan';
+	font-size: 18px;
+	padding-bottom: 15px;
+}
+
 .container {
 	display: grid;
 	grid-template-columns: 1fr 2.75fr;
@@ -42,13 +49,6 @@ body{
 
 .form{
   padding-top: 30px;
-}
-
-#confirmation{
-	display: inline-block;
-	font-family: 'Spartan';
-	font-size: 18px;
-	padding-bottom: 15px;
 }
 
 #titleSpace{
@@ -100,8 +100,8 @@ li a:hover {
 }
 
 #tables{
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 #topNavBar{
