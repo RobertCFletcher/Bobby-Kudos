@@ -1,24 +1,30 @@
 <!doctype html>
+
 <html lang="en">
 
 <head>
   <%- include('partials/head') %>
-  <link rel="stylesheet" type="text/css" href="admin.css" >
+  
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="./assets/admin.css">
 </head>
 <%- include('partials/navbar') %>
 <script>  document.getElementById("link1").classList.add("active") 
           document.getElementById("link2").remove()
           document.getElementById("link4").remove()
           document.getElementById("link6").remove()
-          document.getElementById("link9").remove()
+          document.getElementById("link7").remove()
           document.getElementById("link8").remove()
 </script>
 
-<body>
-  <div class="page-heading">
-    <h3 class="text-center">Kudos User Control</h3>
-  </div>
 
+<body>
+    <div id='titleSpace'>
+      <div id='pageTitle'>Kudos User Control</div>
+	</div>
+	
+	
+    <div id='tables'>
      <table class="table table-striped table-dark">
       <thead>
         <tr>    
@@ -51,50 +57,47 @@
         </tbody>
         
     </table>
+     
+    <br>
 
-
-<table class="table table-striped table-dark">
-  <thead>
-    <tr>    
-      <th> <h3>Manager Users </h3> </th>
-    </tr>
-    <tr>
-      <th>Manager ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Creation Date</th>
-      <th>Created By</th>
-      <th>Modify</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-    <tbody>
-      <%        managerData.forEach(function(ele, i){     %>
-        <tr>
-          <td> <%= managerData[i].userid %> </td> 
-          <td> <%= managerData[i].firstname %> </td>
-          <td> <%= managerData[i].lastname %> </td>
-          <td> <%= managerData[i].email %> </td>
-          <td> <%= managerData[i].createdon.Time %> </td>
-          <td> <%= managerData[i].createdby %> </td>
-          <td> <a href="/admin/modifymanager/<%= managerData[i].userid %> ">Modify </a></td>
-          <td> <a href="/admin/deletemanager/<%= managerData[i].userid %> ">Delete </a></td>
-        </tr>  
-      <%        });                                    %>
-    </tbody>
-    
-</table>
-
-
-
-
+    <table class="table table-striped table-dark">
+      <thead>
+      <tr>    
+        <th> <h3>Manager Users </h3> </th>
+      </tr>
+      <tr>
+        <th>Manager ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Creation Date</th>
+        <th>Created By</th>
+        <th>Modify</th>
+        <th>Delete</th>
+      </tr>
+	  
+      </thead>
+        <tbody>
+          <%        managerData.forEach(function(ele, i){     %>
+          <tr>
+            <td> <%= managerData[i].userid %> </td> 
+            <td> <%= managerData[i].firstname %> </td>
+            <td> <%= managerData[i].lastname %> </td>
+            <td> <%= managerData[i].email %> </td>
+            <td> <%= managerData[i].createdon.Time %> </td>
+            <td> <%= managerData[i].createdby %> </td>
+            <td> <a href="/admin/modifymanager/<%= managerData[i].userid %> ">Modify </a></td>
+            <td> <a href="/admin/deletemanager/<%= managerData[i].userid %> ">Delete </a></td>
+          </tr>  
+          <%        });                                    %>
+        </tbody>
   
+    </table>
 
+</div>
 
+<%- include('partials/footer') %>
+<%- include('partials/footscripts') %>
 
-
-  <%- include('partials/footer') %>
-  <%- include('partials/footscripts') %>
 </body>
 </html>
