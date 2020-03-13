@@ -26,47 +26,49 @@
   
 <a href="/stats"><button id="submitButton">Return To Search</button></a>
 
+<div id="tables">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th>  Matching Awards </th>
+      </tr>
+      <tr>
+        <th>Award ID</th>
+        <th>Date Created</th>
+        <th>Region</th>
+        <th>Award Name</th>
+        <th>Recipient</th>
+        <th>Recipient Email</th>
+        <th>Creator ID</th>
+        <th>Creator Last Name</th>
+        <th>Creator First Name</th>
+  
+      </tr>
+    </thead>
+      <tbody>
+        <%        awardData.forEach(function(ele, i){     %>
+          <tr>
+            <td> <%= awardData[i].id %> </td> 
+            <td> <%= awardData[i].createdon.Time %> </td>
+            <td> <%= awardData[i].region.regionname %> </td>
+            <td> <%= awardData[i].type %> </td>
+            <td> <%= awardData[i].recipientname %> </td>
+            <td> <%= awardData[i].recipientemail %> </td>
+            <td> <%= awardData[i].createdby.userid %> </td>
+            <td> <%= awardData[i].createdby.lastname %> </td>
+            <td> <%= awardData[i].createdby.firstname %> </td>
+  
+  
+  
+          </tr>  
+        <%        });                                    %>
+      </tbody>
+  
+  
+  </table>
+</div>
+
 <br>
-<table class="table table-striped table-dark">
-  <thead>
-    <tr>
-      <th>  Matching Awards </th>
-    </tr>
-    <tr>
-      <th>Award ID</th>
-      <th>Date Created</th>
-      <th>Region</th>
-      <th>Award Name</th>
-      <th>Recipient</th>
-      <th>Recipient Email</th>
-      <th>Creator ID</th>
-      <th>Creator Last Name</th>
-      <th>Creator First Name</th>
-
-    </tr>
-  </thead>
-    <tbody>
-      <%        awardData.forEach(function(ele, i){     %>
-        <tr>
-          <td> <%= awardData[i].id %> </td> 
-          <td> <%= awardData[i].createdon.Time %> </td>
-          <td> <%= awardData[i].region.regionname %> </td>
-          <td> <%= awardData[i].type %> </td>
-          <td> <%= awardData[i].recipientname %> </td>
-          <td> <%= awardData[i].recipientemail %> </td>
-          <td> <%= awardData[i].createdby.userid %> </td>
-          <td> <%= awardData[i].createdby.lastname %> </td>
-          <td> <%= awardData[i].createdby.firstname %> </td>
-
-
-
-        </tr>  
-      <%        });                                    %>
-    </tbody>
-
-
-</table>
-
 <br>
 
 <a href="/stats"><button id="submitButton">Return To Search</button></a>
