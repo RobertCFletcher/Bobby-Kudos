@@ -21,6 +21,10 @@ body{
   background-color: rgba(30, 26, 26, 0.9);
 }
 
+#confirmation{
+	padding-bottom: 15px;
+}
+
 #deleteButton{
 	border-radius: 10px;
 	background-color: rgb(30, 26, 26);
