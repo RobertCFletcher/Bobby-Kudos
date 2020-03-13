@@ -1,0 +1,115 @@
+#adminForm{
+	background-color: white;
+	border-radius: 10px;
+	width: 575px;
+	margin: 0 auto;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	text-align: center;
+}
+
+body{
+	background-color: rgba(93,188,210);
+	background-image: none;
+	background-repeat: no-repeat;
+	background-size: stretch;
+	width: 100%;
+}
+
+#cancelButton{
+	border-radius: 10px;
+	background-color: rgb(30, 26, 26);
+	color: white;
+	display: inline-block;
+	font-family: 'Spartan';
+	font-size: 14px;
+	padding: 15px 40px;
+	text-align: center;
+}
+
+#cancelButton:hover{
+  background-color: rgba(30, 26, 26, 0.9);
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 2.75fr;
+	padding-bottom: 10px;
+	padding-left: 5%;
+	padding-right: 5%;
+	text-align: left;
+}
+
+.form{
+  padding-top: 30px;
+}
+
+#confirmation{
+	display: inline-block;
+	font-family: 'Spartan';
+	font-size: 18px;
+	padding-bottom: 15px;
+}
+
+#titleSpace{
+	padding-bottom: 1%;
+	padding-top: 1%;
+	padding-left: 37%;
+	padding-right: 37%;
+}
+
+li{
+	float: left !important;
+}
+
+li a {
+  
+  display: block !important;
+  color: white !important;
+  font-family: 'Spartan' !important;
+  font-size: 14px !important;
+  text-align: center !important;
+  padding: 16px 16px !important;
+  text-decoration: none !important;
+}
+
+li a:hover {
+  background-color: rgba(255, 255, 255, .95) !important;
+  color: black !important;
+  border-radius: 10px !important;
+}
+
+#submitButton{
+	border-radius: 10px;
+	background-color: rgb(30, 26, 26);
+	color: white;
+	display: inline-block;
+	font-family: 'Spartan';
+	font-size: 14px;
+	padding: 15px 40px;
+	text-align: center;
+}
+
+#submitButton:hover{
+  background-color: rgba(30, 26, 26, 0.9);
+}
+
+.table{
+  border-radius: 10px;
+  outline: none;
+}
+
+#tables{
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+#topNavBar{
+	border-radius: 10px;
+	background: rgba(30, 26, 26, .98);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+	width: 100%;
+}
