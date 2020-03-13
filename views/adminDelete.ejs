@@ -3,56 +3,60 @@
 
 <head>
   <%- include('partials/head') %>
-
-</head>
-<%- include('partials/navbar') %>
-
-<script>  document.getElementById("link1").classList.add("active") 
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
+  <%- include('partials/head') %>
+  <link rel="stylesheet" type="text/css" href="../../assets/managerDelete.css">
+  <%- include('partials/navbar') %>
+  
+  <script>  document.getElementById("link1").classList.add("active") 
           document.getElementById("link2").remove()
           document.getElementById("link4").remove()
           document.getElementById("link6").remove()
           document.getElementById("link9").remove()
           document.getElementById("link8").remove()
+  </script>
 
-</script>
-
+</head>
 
 <body>
+    <div id='titleSpace'></div>
+    <div id="tables">
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>    
+              <th> <h3>Delete The Following Account? </h3> </th>
+            </tr>
+            <tr>
+              <th>Admin ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Creation Date</th>
+              <th>Created By</th>
+              <th>Account Type</th>
+    
+            </tr>
+          </thead>
+            <tbody>
+              <tr>
+                <td> <%= adminData.userid %> </td> 
+                <td> <%= adminData.firstname %> </td>
+                <td> <%= adminData.lastname %> </td>
+                <td> <%= adminData.email %> </td>
+                <td> <%= adminData.createdon.Time %> </td>
+                <td> <%= adminData.createdby %> </td>
+              </tr>  
+            </tbody>
+        </table>
+      </div>
+      
+      <div id='titleSpace'></div>
 
-     <table class="table table-striped table-dark">
-      <thead>
-        <tr>    
-          <th> <h3>Delete The Following Account? </h3> </th>
-        </tr>
-        <tr>
-          <th>Admin ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Creation Date</th>
-          <th>Created By</th>
-          <th>Account Type</th>
-
-        </tr>
-      </thead>
-        <tbody>
-          <tr>
-            <td> <%= adminData.userid %> </td> 
-            <td> <%= adminData.firstname %> </td>
-            <td> <%= adminData.lastname %> </td>
-            <td> <%= adminData.email %> </td>
-            <td> <%= adminData.createdon.Time %> </td>
-            <td> <%= adminData.createdby %> </td>
-          </tr>  
-        </tbody>
-        
-    </table>
-
-      <li>
-        <h4>Are you sure you want to delete this user?</h4>
-      </li>  
-      <a href="/admin/deletead/bye/<%= adminData.userid %>"><button type="button" class="btn btn-danger">Delete Account</button></a>
-      <a href="/admin"><button type="button" class="btn btn-secondary">Cancel</button></a>
+      <div id='managerForm'>
+        <div id="confirmation">Are you sure you want to delete this user?</div>
+        <a href="/admin/deletead/bye/<%= adminData.userid %>"><button id="submitButton" type="button">Delete Account</button></a>
+        <a href="/admin"><button id="cancelButton" type="button">Cancel</button></a>
+      </div>
 
      
 <hr>
