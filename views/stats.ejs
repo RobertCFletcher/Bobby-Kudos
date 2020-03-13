@@ -4,102 +4,65 @@
 <html lang="en">
 
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
   <%- include('partials/head') %>
-  <link rel="stylesheet" type="text/css" href="login.css" >
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-
+  <link rel="stylesheet" type="text/css" href="./assets/stats.css">
+  
+  <%- include('partials/navbar') %>
+  <script>  
+    document.getElementById("link2").classList.add("active") 
+    document.getElementById("link1").remove()
+    document.getElementById("link3").remove()
+	document.getElementById("link8").remove()
+  </script>
 </head>
 
 <body>
-  <%- include('partials/navbar') %>
-  <script>  document.getElementById("link7").classList.add("active") 
-            document.getElementById("link2").remove()
-            document.getElementById("link6").remove()
-            document.getElementById("link4").remove()
-            document.getElementById("link8").remove()
-            document.getElementById("link9").remove()
-
-</script>
-  <div class="page-heading">
-    <h3 class="text-center ">Awards Statistics</h3>
+  <div id='titleSpace'>
+    <div id='pageTitle'>Statistics</div>
   </div>
+  
   <div id=userNumber hidden><%=userNum%></div>
-<div class="row">
-  <div class="card col-lg-6">
-    <h6 class="card-header">Search Awards</h6>
-    <!-- <div class="card-body"> -->
-      <!-- <div id="chart_1"></div> -->
-    <!-- </div> -->
-<form class="card-body" action="/queryAwards" method="post">
-  <div class=" form-group row">
-
-        <label class="col-sm-4 col-form-label" for="sd">Start Date: </label>
-        <input class="col-sm-8 form-control-sm" type="date" id="sd" name="startdate">
-
-
-
-        <label class="col-sm-4 col-form-label" for="ed">End Date: </label>
-        <input class="col-sm-8 form-control-sm" type="date" id="ed" name="enddate" >
-
-
-
-        <label class="col-sm-4 col-form-label" for="at">Award Type: </label>
-        <input class="col-sm-8 form-control-sm" type="text" id="at" name="awardtype" placeholder="Full or Partial Award Name" >
-
-
-
-        <label class="col-sm-4 col-form-label" for="rn">Region Name</label>
-        <input class="col-sm-8 form-control-sm" type="text" id="rn" name="regionname" placeholder="Full of Partial Region Name" >
-
-
-      <label class="col-sm-4 col-form-label" for="rname">Recipient Name</label>
-      <input class="col-sm-8 form-control-sm" type="text" id="rname" name="recipientname" placeholder="Full of Partial Recipient Name" >
-
-
-      <label class="col-sm-4 col-form-label" for="remail">Recipient Email</label>
-      <input class="col-sm-8 form-control-sm" type="text" id="remail" name="recipientemail" placeholder="Full of Partial Recipient Email" >
-
-      <input type="submit" class="btn btn-primary mx-auto" value="Find Awards">
-  </div>
-
-
-
-</form>
-
-
-  </div>
-  <div class="card col-lg-6">
-    <h6 class="card-header">Total Awards Given Per Day-Sitewide (Last 10 Days)</h6>
-    <div class="card-body">
-      <div class="card-body">
-        <div id="chart_2"></div>
+  <div class="row">
+    <div class="card col-lg-6">
+      <h6 class="card-header">Your Awards Given Per Day (Last 10 Days)</h6>
+      <div id="chartSpace" class="card-body">
+        <div id="chart_1"></div>
       </div>
     </div>
-  </div>
-</div> 
-<div class="row">
-  <div class="card col-lg-6">
-    <h6 class="card-header">Total Awards Given By Region</h6>
-    <div class="card-body">
+	<div id="colSpace"></div>
+    <div class="card col-lg-6">
+      <h6 class="card-header">Total Awards Given Per Day-Sitewide (Last 10 Days)</h6>
       <div class="card-body">
-        <div id="chart_3"></div>
+        <div class="card-body">
+          <div id="chart_2"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card col-lg-6">
-    <h6 class="card-header">Most Awarded Employees</h6>
-    <div class="card-body">
+  </div> 
+  <div id="rowSpace">
+  <div class="row">
+    <div class="card col-lg-6">
+      <h6 class="card-header">Total Awards Given By Region</h6>
       <div class="card-body">
-        <div id="chart_4"></div>
+        <div class="card-body">
+          <div id="chart_3"></div>
+        </div>
       </div>
     </div>
-  </div>
-</div> 
+	<div id="colSpace"></div>
+    <div class="card col-lg-6">
+      <h6 class="card-header">Most Awarded Employees</h6>
+      <div class="card-body">
+        <div class="card-body">
+          <div id="chart_4"></div>
+        </div>
+      </div>
+    </div>
+  </div> 
   <%- include('partials/footer') %>
   <%- include('partials/footscripts') %>
-
-
 
 <script> 
 
@@ -129,29 +92,29 @@
         console.log(c3data);
         console.log(c4data);
       // Set a callback to run when the Google Visualization API is loaded.
-      // google.charts.setOnLoadCallback(drawChart1);
+      google.charts.setOnLoadCallback(drawChart1);
       google.charts.setOnLoadCallback(drawChart2);
       google.charts.setOnLoadCallback(drawChart3);
       google.charts.setOnLoadCallback(drawChart4);
 
       //CHART1 - Local account awards given - last 90 days
-      // function drawChart1() {
+      function drawChart1() {
 
-      //   // Create the data table.
-      //   var data = new google.visualization.DataTable();
-      //   data.addColumn('date', 'Date');
-      //   data.addColumn('number', 'Awards Given By You');
-      //   data.addRows( c1data );
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Awards Given By You');
+        data.addRows( c1data );
 
-      //   // Set chart options
-      //   var options = {'title':'The awards you sent each day (previous 10 days)',
-      //                 'width':600,
-      //                 'height':400};
+        // Set chart options
+        var options = {'title':'The awards you sent each day (previous 10 days)',
+                      'width':600,
+                      'height':400};
 
-      //   // Instantiate and draw our chart, passing in some options.
-      //   var chart = new google.visualization.LineChart(document.getElementById('chart_1'));
-      //   chart.draw(data, options);
-      // }
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.getElementById('chart_1'));
+        chart.draw(data, options);
+      }
 
       //CHART2 - Total Awards given - sitewide last 90 days
       function drawChart2() {
