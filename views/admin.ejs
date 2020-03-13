@@ -57,44 +57,42 @@
         </tbody>
         
     </table>
-     
-    <hr>
 
-    <table class="table table-striped table-dark">
-      <thead>
-      <tr>    
-        <th> <h3>Manager Users </h3> </th>
-      </tr>
-      <tr>
-        <th>Manager ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Creation Date</th>
-        <th>Created By</th>
-        <th>Modify</th>
-        <th>Delete</th>
-      </tr>
-	  
-      </thead>
-        <tbody>
-          <%        managerData.forEach(function(ele, i){     %>
-          <tr>
-            <td> <%= managerData[i].userid %> </td> 
-            <td> <%= managerData[i].firstname %> </td>
-            <td> <%= managerData[i].lastname %> </td>
-            <td> <%= managerData[i].email %> </td>
-            <td> <%= managerData[i].createdon.Time %> </td>
-            <td> <%= managerData[i].createdby %> </td>
-            <td> <a href="/admin/modifymanager/<%= managerData[i].userid %> ">Modify </a></td>
-            <td> <a href="/admin/deletemanager/<%= managerData[i].userid %> ">Delete </a></td>
-          </tr>  
-          <%        });                                    %>
-        </tbody>
-  
-    </table>
 
-</div>
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>    
+      <th> <h3>Manager Users </h3> </th>
+    </tr>
+    <tr>
+      <th>Manager ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Creation Date</th>
+      <th>Created By</th>
+      <th>Modify</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+    <tbody>
+      <%        managerData.forEach(function(ele, i){     %>
+        <tr>
+          <td> <%= managerData[i].userid %> </td> 
+          <td> <%= managerData[i].firstname %> </td>
+          <td> <%= managerData[i].lastname %> </td>
+          <td> <%= managerData[i].email %> </td>
+          <td> <%= managerData[i].createdon.Time %> </td>
+          <td> <%= managerData[i].createdby %> </td>
+          <td> <a href="/admin/modifymanager/<%= managerData[i].userid %> ">Modify </a></td>
+          <td> <a href="/admin/deletemanager/<%= managerData[i].userid %> ">Delete </a></td>
+        </tr>  
+      <%        });                                    %>
+    </tbody>
+    
+</table>
+
+    </div>
 
 </body>
 </html>
