@@ -32,28 +32,29 @@ body{
 }
 
 li{
-	float: left;
+	float: left !important;
 }
 
 li a {
-  display: block;
-  color: white;
-  font-family: 'Spartan';
-  font-size: 14px;
-  text-align: center;
-  padding: 16px 16px;
-  text-decoration: none;
+  
+  display: block !important;
+  color: white !important;
+  font-family: 'Spartan' !important;
+  font-size: 14px !important;
+  text-align: center !important;
+  padding: 16px 16px !important;
+  text-decoration: none !important;
 }
 
 li a:hover {
-  background-color: rgba(255, 255, 255, .95);
-  color: black;
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, .95) !important;
+  color: black !important;
+  border-radius: 10px !important;
 }
 
 #link9 {
-  float: right;
-  border-radius: 10px;
+  float: right !important;
+  border-radius: 10px !important;
 }
 
 #pageTitle{
