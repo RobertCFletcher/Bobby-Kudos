@@ -4,15 +4,11 @@
 
 <head>
   <link href="https://fonts.googleapis.com/css?family=Spartan:400,700&display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" type="text/css" href="./assets/account.css">
   <%- include('partials/head') %>
-  <link rel="stylesheet" type="text/css" href="login.css" >
-</head>
-
-<body>
-
-<%- include('partials/navbar') %>
-<script>  
+  <%- include('partials/navbar') %>
+  <link rel="stylesheet" type="text/css" href="./assets/account.css">
+  
+  <script>  
           var entry =   <%- type %>;
           console.log(entry);
           document.getElementById("link9").classList.add("active") 
@@ -28,8 +24,10 @@
           document.getElementById("link7").remove()
           // document.getElementById("link8").remove()
           // document.getElementById("link9").remove()        
-
 </script>
+</head>
+
+<body>
 
 <div id='titleSpace'>
     <div id='pageTitle'>Update Account</div>
@@ -77,4 +75,3 @@
 <%- include('partials/footscripts') %>
 </body>
 </html>
-
