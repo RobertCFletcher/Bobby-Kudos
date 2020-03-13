@@ -25,17 +25,8 @@
   <div id='deleteInfo'>
       <div id="Confirmation">Are you sure you want to delete Award <%=AwardNum %>?</div>
       <a href="/manager/deleteaward/bye/<%=AwardNum%>"><button id="deleteButton" type="button">Delete Award</button></a>
-      <a href="/manager"><button type="button" class="btn btn-secondary">Cancel</button></a>
+      <a href="/manager"><button id="cancelButton" type="button">Cancel</button></a>
   </div>
-  <br>
-
-<div class="row">
-      <div class="card col-md-4 mx-auto text-center bg-warning">
-                <h4 class="card-header text-center bg-dark text-light">Are you sure you want to delete Award <%=AwardNum %>?</h4>
-      <a href="/manager/deleteaward/bye/<%=AwardNum%>"><button type="button" class="btn btn-danger text-center">Delete Award</button></a>
-      <a href="/manager"><button type="button" class="btn btn-secondary">Cancel</button></a>
-      </div>
-</div>
 
   <%- include('partials/footer') %>
   <%- include('partials/footscripts') %>
