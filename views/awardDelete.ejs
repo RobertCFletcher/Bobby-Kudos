@@ -18,6 +18,34 @@
 
 <body>
 
+  <div id='titleSpace'>
+      <div id='pageTitle'>New Account Creation</div>
+  </div>
+  
+  <table class="table table-striped table-dark">
+      <thead>
+          <tr><th> <h3>Delete the Following Award? </h3> </th></tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Region</th>
+            <th>Award</th>
+            <th>Recipient</th>
+            <th>Email</th>
+      </thead>
+      <tbody>
+      <%        awardData.forEach(function(ele, i){     %>
+              <tr>
+                <td> <%= awardData[i].id %> </td> 
+                <td> <%= awardData[i].createdon.Time %> </td>
+                <td> <%= awardData[i].region.regionname %> </td>
+                <td> <%= awardData[i].type %> </td>
+                <td> <%= awardData[i].recipientname %> </td>
+                <td> <%= awardData[i].recipientemail %> </td>
+              </tr>  
+            <%        });                                    %>
+      </tbody>
+  </table>
+
 <div class="row">
       <div class="card col-md-4 mx-auto text-center bg-warning">
                 <h4 class="card-header text-center bg-dark text-light">Are you sure you want to delete Award <%=AwardNum %>?</h4>
