@@ -41,7 +41,6 @@
         var authenticateUser = async function(email, password, done){
                 try{
                     var user = await getUserByEmail(email)                      //await is expecting a promise to be resolved in getUserByEmail
-// /*DEBUG*/           console.log("||| DEBUG 2 (start auth) - this is the user", user.id, user.hash, user.email, user.type)
                     testUser(user, password, done)
                    } 
                 catch(error){
@@ -61,23 +60,17 @@
     }
     //================================================================    
     function testUser( user, password, done){
-            // console.log("password: ", password);
-            // console.log("recieved pass: ", user.password);
-            // console.log("bcrypt: ", bcrypt.compare(password, user.password))
                 if(user==null){
                    //No matching email in DB to user's email
-                //    console.log("user failed")
                    return done(null, false, { message: "Email or password incorrect" })
                 }
                 bcrypt.compare(password, user.password).then(function(result){
                    if(result == true){
-                    //     console.log("user passed")
                         //password correct, return authenticated user
                         return done(null, user)
                     }
                     else {
                     //password incorrect
-                        // console.log("user failed")
                         return done(null, false, { message: "Email or password incorrect" })
                     }
                 }    
@@ -115,7 +108,6 @@
                             user.type = personObj.usertype;
                             user.createdby = personObj.createdby;
                                                 }
-                        // console.log("Get user by email:", user)
                         resolve(user);
                     }
                 });
@@ -164,17 +156,14 @@
     app.use(passport.initialize());
     app.use(passport.session());    //link passport to express sessions for persistant login
     app.use(express.static("public")); //use public folder to hold assets
-    app.use('/public', express.static('public'));
 
     //COOKIE CHECK
     //==================================================================  
     function checkAuthenticated(req, res, next){
         if (req.isAuthenticated()){                 //Passport Auth function
-//            console.log("|||DEBUG 7 - Auth check");
             return next()
         }
         else{
-//            console.log("|||DEBUG 8 - Auth failed")
             res.redirect("/login");
         }
     }
@@ -184,11 +173,9 @@
     function requireRole(role){
     return function (req, res, next) {
         if (req.user && req.user.type === role) {
-//           console.log("|||DEBUG 5  - role check");
             next();
         } else {
             res.redirect("./login");
-//            console.log("|||DEBUG 6 - Role Check Failure:", req.user, "    Role: ",role);
         }
       }
     }
@@ -207,7 +194,6 @@
         });
 
         app.post("/login", passport.authenticate("local",{
-            // console.log(req.body.userEmail); console.log(req.body.userPass);
             successRedirect: "/loginSuccess",
             failureRedirect: "/login",
             failureFlash: true      //displays flash message about failure type
@@ -246,7 +232,6 @@
                 for ( var i = 0; i < hashLength; i++ ) {
                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
                 }
-                console.log(result);
 
                 //send email
                 var mailOptions = {
@@ -260,7 +245,6 @@
                     if (error) {
                       console.log(error);
                     } else {
-                      console.log('Email sent: ' + info.response);
                     }
                   }); 
 
@@ -279,13 +263,11 @@
                             updateParams.lastname = bodyParsed.lastname;
                         }
                         bodyString = JSON.stringify(updateParams);
-                        console.log(bodyString)
                         var options = { method: 'PUT',
                         url: 'https://kudosapi.wl.r.appspot.com/users/'+ resetList.userType + "s/" +resetList.userID,
                         headers: { 'cache-control': 'no-cache' },
                         body:bodyString
                         };
-                        console.log(options);    
                         request(options, function (error2, response2, body2) {
                             if (error2) throw new Error(error2);
                                 {res.redirect("/login");}
@@ -324,13 +306,10 @@
 
         
         app.post("/create", checkAuthenticated, requireRole("admin"), async(req,res) => {
-            // "accountType" is {"admin" or "manager"}
-            // console.log(req.body.userEmail); console.log(req.body.userPass); console.log(req.body.accountType);
-        
+            // "accountType" is {"admin" or "manager"}        
             try{
                 var hashedPass = await bcrypt.hash(req.body.userPass, 10)       //Hash the user created password for safe storage (10 is Salt Val)
                 // API CALL HERE TO CREATE ACCOUNT
-                // console.log(req.body)
                 if(req.body.accountType === "manager")
                 {
                         var data = {
@@ -340,7 +319,6 @@
                         password: hashedPass,
                         createdby: req.user.id
                         }
-                        // console.log(JSON.stringify(data));
                         var options = { method: 'POST',
                           url: 'https://kudosapi.wl.r.appspot.com/users/managers',
                           headers: 
@@ -352,7 +330,6 @@
                         
                         request(options, function (error, response, body) {
                           if (error) throw new Error(error);
-                        //   console.log(response);                       
                           res.redirect("/admin")
                         });
                 }
@@ -365,9 +342,6 @@
                         password: hashedPass,
                         createdby: req.user.id
                         }
-                        // console.log(data)
-                        // var bodySub = JSON.stringify(data)
-                        // console.log(formdata)
 
                         var options = { method: 'POST',
                           url: 'https://kudosapi.wl.r.appspot.com/users/admins',
@@ -380,9 +354,6 @@
                         
                         request(options, function (error, response, body) {
                           if (error) throw new Error(error);
-                            
-                        //   console.log("Body", body);
-                        //   console.log("REsponse:", response)
                           res.redirect("/admin")
                         });
                 }
@@ -391,7 +362,6 @@
                 console.log(error);
                 res.redirect("/badrequest2")
             }
-//            console.log(users);
             
         });
 
@@ -403,7 +373,6 @@
                 userRequest = "https://kudosapi.wl.r.appspot.com/users/managers";
                 request(userRequest, function (error, response, managerbody){
                     managerParsed = JSON.parse(managerbody)
-                // console.log(adminUsers, managerUsers);
                 res.render("admin.ejs", {pagetitle: "Admin", adminData: adminParsed, managerData: managerParsed, userid: req.user.id});
                 });    
             });
@@ -428,7 +397,6 @@
                 };
                 if(updateParams.email === ""){updateParams.email = bodyParsed.email};  
             bodyString = JSON.stringify(updateParams);
-            // console.log(bodyString)
             var options = { method: 'PUT',
                 url: 'https://kudosapi.wl.r.appspot.com/users/admins/'+req.params.modNum,
                 headers: { 'cache-control': 'no-cache' },
@@ -436,7 +404,6 @@
                 };
             request(options, function (error2, response2, body2) {
                 if (error2) throw new Error(error2);
-                 console.log(response2)
                 res.redirect("/admin")
 
             });
@@ -479,8 +446,6 @@
         userRequest = "https://kudosapi.wl.r.appspot.com/users/managers/";
         request(userRequest + req.params.modNum, function (error, response, body){
             bodyParsed = JSON.parse(body);
-            // console.log(bodyParsed)
-            // console.log(req.body)
 
             var updateParams = {
                 firstname: req.body.firstname,
@@ -493,9 +458,7 @@
             if(updateParams.lastname === ""){updateParams.lastname = bodyParsed.lastname};    
             if(updateParams.email === ""){updateParams.email = bodyParsed.email};    
 
-            // console.log(updateParams);
             bodyString = JSON.stringify(updateParams);
-            // console.log(bodyString)
             var options = { method: 'PUT',
                 url: 'https://kudosapi.wl.r.appspot.com/users/managers/'+req.params.modNum,
                 headers: { 'cache-control': 'no-cache' },
@@ -503,7 +466,6 @@
                 };
             request(options, function (error2, response2, body2) {
                 if (error2) throw new Error(error2);
-                console.log(response2)
                 res.redirect("/admin")
 
             });
@@ -539,15 +501,9 @@
         app.get("/manager", checkAuthenticated, requireRole("manager"), function(req, res){
 
             userRequest = "https://kudosapi.wl.r.appspot.com/awards/" ;
-            // console.log(userRequest)
-            // console.log("user: ", req.user.id);
             request(userRequest, function (error, response, body){
-                // console.log(body)
-                // console.log(body)
-                // console.log("|", body, "|", "|", "test", typeof(body))
                 if(body.trim() === "sql: no rows in result set" || body.trim() == "null")
                 {
-                    // console.log("trigger")
                     parsedData = [];
                 }
                 else
@@ -556,16 +512,11 @@
                 }
                 if(parsedData.length === undefined) //less than 2 awards, so get obj instead of array
                 {
-                    // console.log("trigger2")
                 var tempArray = []
                     tempArray.push(parsedData);
                     parsedData = tempArray;
                 }
-                // console.log(typeof(parsedData));
                 var tempData = []
-                // console.log(parsedData)
-                // console.log(parsedData);
-                // console.log(body)
                 if(body != "null"){
                     for(var j=0; j<parsedData.length; j++)
                     {
@@ -573,7 +524,6 @@
                         tempData.push(parsedData[j]);
                     }
                 }
-                    // console.log(parsedData);
                 res.render("manager.ejs",{awardData: tempData, pagetitle: "Manager"});
             });
         });
@@ -597,9 +547,7 @@
                 recipientemail: req.body.recipientemail,
                 createdby: {userid: req.user.id }
                 };
-            // console.log(updateParams);
             bodyString = JSON.stringify(updateParams);
-            console.log(bodyString)
             var options = { method: 'POST',
                 url: 'https://kudosapi.wl.r.appspot.com/awards/',
                 headers: { 'cache-control': 'no-cache' },
@@ -607,8 +555,6 @@
                 };
             request(options, function (error2, response2, body2) {
                 if (error2) throw new Error(error2);
-                // console.log(response2)
-                // console.log("body|||||", body2)
                 res.redirect("/manager")
 
             });
@@ -635,14 +581,12 @@
     });
 
     //AWARD STATS
-    app.get("/stats", checkAuthenticated, requireRole("manager"), function(req, res){
+    app.get("/stats", checkAuthenticated, requireRole("admin"), function(req, res){
         //Chart1 = Local awards given
         //Chart2= Total awards given
         //Chart3= Awards by region
         //Chart4= Most Awarded Employees
-        // console.log("user: ", req.user.id);
         request("https://kudosapi.wl.r.appspot.com/awards/", function (error, response, body){
-            // console.log(body)
             //Parse Awards Data from API
             awardData = [];
             if(body.trim() === "sql: no rows in result set")
@@ -652,7 +596,6 @@
             else
             {
                 awardData = JSON.parse(body);
-                // console.log(awardData)
             }
             //Create Array of the last 10 days
             var pastTen = [];
@@ -687,8 +630,6 @@
                         var testDate = (new Date(awardData[i].createdon.Time));
                         testDate.setHours(0,0,0,0); 
                         matchDate = pastTen[j];
-                        // console.log("MatchTime: ", matchDate.getTime());   
-                        // console.log("TestTime : ", testDate.getTime());
                         if(testDate.getTime()===matchDate.getTime())   
                                  {   
                                    //if match increment global counter   
@@ -710,7 +651,6 @@
             //Chart 3 data gathering
                   //get all regions
                 var regions = []
-                // console.log(awardData);
                 for(var j = 0; j < awardData.length; j++)
                 {
                     //check if region is already added
@@ -722,11 +662,9 @@
                     }
                     if(!found){
                         tempObj = {name: awardData[j].region.regionname, id: awardData[j].region.regionid};
-                        // console.log(tempObj);
                         regions.push(tempObj);
                     }
                 }
-                // console.log(regions);
                   //count number of each region
                 var chart3data = [];
                 for(var j = 0; j < regions.length; j++)
@@ -741,10 +679,6 @@
                     }
                     chart3data[j][1] = count;
                 }
-                // console.log(chart3data);
-
-                // console.log(chart3data);
-
             //Chart 4 data gathering
                   //get the recipient names
                 var recipients = []
@@ -754,7 +688,6 @@
                         recipients.push(awardData[j].recipientname)
                     }
                 }
-                // console.log(recipients);
                   //count number of recipient awards
                 chart4objs = [];
                 for(var j = 0; j < recipients.length; j++)
@@ -794,9 +727,31 @@
 
             res.render("stats.ejs", {pagetitle: "Award Statistics", userNum: req.user.id, chart1data: chart1data, chart2data: chart2data, chart3data: chart3data, chart4data: chart4data});
         });
-
-
     });
+
+    //QUERY SEARCH
+    app.post("/queryAwards", checkAuthenticated, requireRole("admin"), function(req, res){
+            // Create search query string from form params
+            var query = req.body
+            var urlstring = "https://kudosapi.wl.r.appspot.com/awards/search?"
+            var paramAdded = 0;
+            for(var key in query)
+            {
+                if(query[key] != ""){
+                    if(paramAdded === 1)
+                    {urlstring = urlstring + "&"}
+                    urlstring = urlstring + key + "=" + query[key];
+                    paramAdded = 1;
+                }
+            }
+            //Send API search request
+            request(urlstring, function (error, response, body){
+                var searchResults = JSON.parse(body);
+                if(body.trim()=="null"){searchResults = []};
+                res.render("awardResults.ejs", {pagetitle: "Award Results", awardData: searchResults})
+            });    
+    });
+
 
     //UPDATE SIGNATURE
     app.get("/sig", checkAuthenticated, requireRole("manager"), function(req, res){
@@ -807,8 +762,6 @@
 
         var updateParams ={ image:  req.body.svgEncode,
                             id: req.user.id} 
-
-            console.log(updateParams);
 
             try{
                 //create svg file from svg base64 encode in "public/signatures" folder
@@ -823,8 +776,6 @@
                         //send png in request
                         var pngReadStream = fs.createReadStream("public/signatures/sig" +req.user.id + ".png");
                         var fname = "sig" + req.user.id + ".png";
-                        console.log(pngReadStream);
-                        console.log(fname);
                         var options = { method: 'POST',
                         url: 'https://kudosapi.wl.r.appspot.com/users/managers/' + req.user.id +'/signature',
                         qs: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -838,8 +789,6 @@
                       
                         request(options, function (error, response, body) {
                             if (error) throw new Error(error);
-                        
-                            console.log(body);
                             res.render("sigdone.ejs", {pagetitle: "Update Signature", userNum: req.user.id, result: body.userid });
                         });
 
@@ -858,48 +807,83 @@
 
 
 
-    //UPDATE PASSWORD
-    app.get("/account", checkAuthenticated, function(req, res){  
-        res.render("account.ejs", {pagetitle: "Update Account", type: JSON.stringify(req.user.type)});
+    //MANAGER UPDATE PASSWORD
+    app.get("/account", checkAuthenticated, requireRole("manager"), function(req, res){  
+        userRequest = "https://kudosapi.wl.r.appspot.com/users/managers/" + req.user.id;
+        request(userRequest, function (error, response, managerbody){
+            managerParsed = JSON.parse(managerbody)
+            res.render("account.ejs", {pagetitle: "Update Account", type: JSON.stringify(req.user.type), man : managerParsed, msg: ""});
+        });    
     });
 
-    app.post("/accountpass", checkAuthenticated, async function(req, res){
-        try{    newpassword = await bcrypt.hash(req.body.newpass, 10) 
+    app.post("/accountpass", checkAuthenticated, requireRole("manager"), async function(req, res){
+        try{    //hash new password
+                newpassword = await bcrypt.hash(req.body.newpass, 10);
+                //request user information
                 userRequest = "https://kudosapi.wl.r.appspot.com/users/" + req.user.type +"s/" + req.user.id;
-                request(userRequest, function (error, response, body){
-                    // console.log("body: ", body)
-                    bodyParsed = JSON.parse(body);
-                    var updateParams = {
-                        email: bodyParsed.email,
-                        password: newpassword
-                        };
-                        // console.log(req.user.type)    
-                    if(req.user.type === "manager")
-                    {
+                request(userRequest, function (error2, response2, body2){
+                    // throw request to get current user hash'
+                    var userdata= JSON.parse(body2)
+                    userRequest = "https://kudosapi.wl.r.appspot.com/users/" + userdata.email ;
+                    request(userRequest, function (error, response, body){
+                        bodyParsed = JSON.parse(body);
+                        //compare current pass to current hash
+                        bcrypt.compare(req.body.currentpass, bodyParsed.password, function(err, result){
+                            //If customer password matches
+                            if(result == true){
+                                        var updateParams = {
+                                        email: bodyParsed.email,
+                                        password: newpassword
+                                        };
+                                        //check if user gave new firstname    
+                                        if(req.body.newfn === ""){
+                                            updateParams.firstname = userdata.firstname;
+                                        }else{
+                                            updateParams.firstname = req.body.newfn;
+                                        }
+                                        //check if user gave new lastname
+                                        if(req.body.newln === ""){
+                                            updateParams.lastname = userdata.lastname;
+                                        }else{
+                                            updateParams.lastname = req.body.newln;
+                                        }
+                                        //Request password change
+                                        bodyString = JSON.stringify(updateParams);
+                                        var options = { method: 'PUT',
+                                        url: 'https://kudosapi.wl.r.appspot.com/users/'+ req.user.type + "s/" +req.user.id,
+                                        headers: { 'cache-control': 'no-cache' },
+                                        body:bodyString
+                                        };   
+                                        request(options, function (error3, response3, body3) {
+                                            if (error3) throw new Error(error3);
+                                            res.redirect("/manager");     
+                                        });
+                                
+                            }
+                            //Current password failed to match,
+                            else{
+                                userRequest = "https://kudosapi.wl.r.appspot.com/users/managers/" + req.user.id;
+                                request(userRequest, function (error, response, managerbody){
+                                    managerParsed = JSON.parse(managerbody)
+                                    res.render("account.ejs", {pagetitle: "Update Account", type: JSON.stringify(req.user.type), man : managerParsed, msg: "CURRENT PASSWORD INCORRECT"});
+                                });    
+                            }
+    
+                        });
                         
-                        updateParams.firstname = bodyParsed.firstname;
-                        updateParams.lastname = bodyParsed.lastname;
-                    }
-                    // console.log(updateParams)
-                    bodyString = JSON.stringify(updateParams);
-                    // console.log(bodyString)
-                    var options = { method: 'PUT',
-                    url: 'https://kudosapi.wl.r.appspot.com/users/'+ req.user.type + "s/" +req.user.id,
-                    headers: { 'cache-control': 'no-cache' },
-                    body:bodyString
-                    };
-                    // console.log(options);    
-                    request(options, function (error2, response2, body2) {
-                        if (error2) throw new Error(error2);
-                        // console.log(response2)
-                        // console.log("body|||||", body2)
-                        if(req.user.type === "manager")
-                            {res.redirect("/manager");}
-                        else
-                            {res.redirect("/admin")}
+                        
 
                     });
-                });
+
+
+
+
+
+
+
+
+                    });   
+
         }
         catch(error){
             console.log(error);
