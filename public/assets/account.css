@@ -71,6 +71,10 @@ li a:hover {
 	text-align: center;
 }
 
+#pass{
+	padding-bottom: 20px;	
+}
+
 #password{
 	margin-right: 15%;
 }
